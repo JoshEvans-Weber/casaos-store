@@ -1,4 +1,4 @@
-name: vs-custom-josh
+name: vintagestory-custom
 services:
   vintagestory:
     image: ghcr.io/joshevans-weber/vs-custom:latest
@@ -10,14 +10,11 @@ services:
     volumes:
       - /DATA/AppData/vintagestory/data:/vintagestory/data
     environment:
-      # --- System & Permissions ---
       - UID_NUMBER=${UID_NUMBER:-1100}
       - GID_NUMBER=${GID_NUMBER:-1100}
-      - DOTNET_GCHeapHardLimit=${DOTNET_GCHeapHardLimit:-0x280000000}
-      - DOTNET_gcServer=${DOTNET_gcServer:-1}
+      - DOTNET_GCHeapHardLimit=${DOTNET_GC_LIMIT:-0x280000000}
+      - DOTNET_gcServer=${DOTNET_GC_SERVER:-1}
       - DOTNET_VERSION=${DOTNET_VERSION:-8.0}
-      
-      # --- Server Identity ---
       - SERVER_NAME=${SERVER_NAME:-Vintage Story Server}
       - WELCOME_MESSAGE=${WELCOME_MESSAGE:-Welcome {0}, may you survive well and prosper}
       - SERVER_DESCRIPTION=${SERVER_DESCRIPTION}
@@ -27,8 +24,6 @@ services:
       - ONLY_WHITELISTED=${ONLY_WHITELISTED:-false}
       - ADMIN_USERNAME=${ADMIN_USERNAME}
       - DEFAULT_ROLE_CODE=${DEFAULT_ROLE_CODE:-suplayer}
-      
-      # --- Gameplay Logic ---
       - WORLD_NAME=${WORLD_NAME:-Vintage Story World}
       - WORLD_SEED=${WORLD_SEED}
       - PLAY_STYLE=${PLAY_STYLE:-surviveandbuild}
@@ -38,31 +33,25 @@ services:
       - ALLOW_FALLING_BLOCKS=${ALLOW_FALLING_BLOCKS:-true}
       - ALLOW_FIRE_SPREAD=${ALLOW_FIRE_SPREAD:-true}
       - ANTI_ABUSE=${ANTI_ABUSE:-Off}
-      
-      # --- World Config (The "June" Settings) ---
-      - WORLDCONFIG_GAME_MODE=${WORLDCONFIG_GAME_MODE:-survival}
-      - WORLDCONFIG_MOVE_SPEED=${WORLDCONFIG_MOVE_SPEED:-1.5}
-      - WORLDCONFIG_PLAYER_HEALTH=${WORLDCONFIG_PLAYER_HEALTH:-15}
-      - WORLDCONFIG_HUNGER_SPEED=${WORLDCONFIG_HUNGER_SPEED:-1}
-      - WORLDCONFIG_FOOD_SPOIL=${WORLDCONFIG_FOOD_SPOIL:-1}
-      - WORLDCONFIG_TOOL_DURABILITY=${WORLDCONFIG_TOOL_DURABILITY:-1}
-      - WORLDCONFIG_SAPLING_GROWTH=${WORLDCONFIG_SAPLING_GROWTH:-1}
-      - WORLDCONFIG_CREATURE_HOSTILITY=${WORLDCONFIG_CREATURE_HOSTILITY:-aggressive}
-      - WORLDCONFIG_DEATH_PUNISHMENT=${WORLDCONFIG_DEATH_PUNISHMENT:-drop}
-      - WORLDCONFIG_TEMPORAL_STORMS=${WORLDCONFIG_TEMPORAL_STORMS:-sometimes}
-      - WORLDCONFIG_TEMPORAL_RIFTS=${WORLDCONFIG_TEMPORAL_RIFTS:-visible}
-      - WORLDCONFIG_ALLOW_MAP=${WORLDCONFIG_ALLOW_MAP:-true}
-      - WORLDCONFIG_ALLOW_COORDINATES=${WORLDCONFIG_ALLOW_COORDINATES:-true}
-      - WORLDCONFIG_WORLD_CLIMATE=${WORLDCONFIG_WORLD_CLIMATE:-realistic}
-      
-      # --- Internal Paths ---
+      - WORLDCONFIG_GAME_MODE=${WORLD_MODE:-survival}
+      - WORLDCONFIG_MOVE_SPEED=${MOVE_SPEED:-1.5}
+      - WORLDCONFIG_PLAYER_HEALTH=${HEALTH:-15}
+      - WORLDCONFIG_HUNGER_SPEED=${HUNGER:-1}
+      - WORLDCONFIG_FOOD_SPOIL=${SPOIL:-1}
+      - WORLDCONFIG_TOOL_DURABILITY=${DURABILITY:-1}
+      - WORLDCONFIG_SAPLING_GROWTH=${SAPLINGS:-1}
+      - WORLDCONFIG_CREATURE_HOSTILITY=${HOSTILITY:-aggressive}
+      - WORLDCONFIG_DEATH_PUNISHMENT=${DEATH:-drop}
+      - WORLDCONFIG_TEMPORAL_STORMS=${STORMS:-sometimes}
+      - WORLDCONFIG_TEMPORAL_RIFTS=${RIFTS:-visible}
+      - WORLDCONFIG_ALLOW_MAP=${MAP:-true}
+      - WORLDCONFIG_ALLOW_COORDINATES=${COORDS:-true}
+      - WORLDCONFIG_WORLD_CLIMATE=${CLIMATE:-realistic}
       - DATAPATH=/vintagestory/data
       - HOMEPATH=/vintagestory
       - VSPATH=/vintagestory/server
       - SAVE_FILE_LOCATION=/vintagestory/data/Saves/default.vcdbs
-      
-      # --- Secrets & Extras ---
-      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - OPENAI_API_KEY=${OPENAI_KEY}
     stdin_open: true
     tty: true
 
@@ -74,17 +63,7 @@ x-casaos:
   title:
     en_us: "Vintage Story (Josh's Cloud)"
   description:
-    en_us: "Full server build. All gameplay and system variables exposed."
+    en_us: "Full server build with all environment variables exposed."
   port_map: "7681"
-  developer: "JoshEvans-Weber"
-  author: "Josh"
   category: "Game"
-  envs:
-    - container: WORLD_NAME
-      description: { en_us: "World Name" }
-    - container: WORLDCONFIG_MOVE_SPEED
-      description: { en_us: "Movement Speed (Default 1.5)" }
-    - container: WORLDCONFIG_TEMPORAL_STORMS
-      description: { en_us: "Storm Frequency (off, rare, sometimes, often)" }
-    - container: OPENAI_API_KEY
-      description: { en_us: "OpenAI API Key" }
+  developer: "JoshEvans-Weber"
