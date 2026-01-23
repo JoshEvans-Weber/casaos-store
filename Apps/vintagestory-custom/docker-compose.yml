@@ -62,7 +62,7 @@ x-casaos:
   architectures:
     - amd64
   main: vintagestory
-  icon: https://raw.githubusercontent.com/JoshEvans-Weber/casaos-store/main/Apps/vintagestory-custom/icon.png
+  icon: https://wiki.vintagestory.at/images/8/8a/Gamelogo-vintagestory.png
   title:
     en_us: Vintage Story (Josh's Cloud)
   description:
