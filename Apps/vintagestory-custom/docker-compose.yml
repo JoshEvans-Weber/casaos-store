@@ -1,0 +1,28 @@
+version: '3.8'
+services:
+  vintagestory:
+    image: ghcr.io/joshevans-weber/vs-custom:latest
+    container_name: vs-server
+    restart: always
+    ports:
+      - "${SERVER_PORT:-42420}:42420/udp"
+      - "7681:7681"
+    volumes:
+      - /DATA/AppData/vintagestory/data:/vintagestory/data
+    environment:
+      - UID_NUMBER=${UID_NUMBER:-1100}
+      - GID_NUMBER=${GID_NUMBER:-1100}
+      - WORLD_NAME=${WORLD_NAME:-Vintage Story World}
+      - WORLDCONFIG_MOVE_SPEED=${MOVE_SPEED:-1.5}
+      - WORLDCONFIG_CREATURE_HOSTILITY=${HOSTILITY:-aggressive}
+      - WORLDCONFIG_DEATH_PUNISHMENT=${DEATH_MODE:-drop}
+      - OPENAI_API_KEY=${OPENAI_KEY}
+    stdin_open: true
+    tty: true
+x-casaos:
+  architectures: ["amd64"]
+  main: vintagestory
+  icon: https://wiki.vintagestory.at/images/a/a3/Vintagestory-logo.png
+  title: { en_us: "Vintage Story (Josh's Cloud)" }
+  description: { en_us: "Custom server with baked-in terminal and June settings." }
+  port_map: "7681"
