@@ -64,7 +64,7 @@ x-casaos:
   main: vintagestory
   icon: https://wiki.vintagestory.at/images/8/8a/Gamelogo-vintagestory.png
   title:
-    en_us: Vintage Story (Josh's Cloud)
+    en_us: Vintage Story
   description:
     en_us: "The complete server build with all environment variables exposed for easy tweaking."
   port_map: "7681"
