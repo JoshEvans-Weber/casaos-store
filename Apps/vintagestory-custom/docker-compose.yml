@@ -10,60 +10,22 @@ services:
     volumes:
       - /DATA/AppData/vintagestory/data:/vintagestory/data
     environment:
+      - WORLDCONFIG_MOVE_SPEED=${MOVE_SPEED:-1.5}
+      - WORLDCONFIG_CREATURE_HOSTILITY=${HOSTILITY:-aggressive}
+      - OPENAI_API_KEY=${OPENAI_KEY}
       - UID_NUMBER=${UID_NUMBER:-1100}
       - GID_NUMBER=${GID_NUMBER:-1100}
-      - DOTNET_GCHeapHardLimit=${DOTNET_GC_LIMIT:-0x280000000}
-      - DOTNET_gcServer=${DOTNET_GC_SERVER:-1}
-      - DOTNET_VERSION=${DOTNET_VERSION:-8.0}
-      - SERVER_NAME=${SERVER_NAME:-Vintage Story Server}
-      - WELCOME_MESSAGE=${WELCOME_MESSAGE:-Welcome {0}, may you survive well and prosper}
-      - SERVER_DESCRIPTION=${SERVER_DESCRIPTION}
-      - MAX_CLIENTS=${MAX_CLIENTS:-16}
-      - SERVER_PASSWORD=${SERVER_PASSWORD}
-      - ADVERTISE_SERVER=${ADVERTISE_SERVER:-false}
-      - ONLY_WHITELISTED=${ONLY_WHITELISTED:-false}
-      - ADMIN_USERNAME=${ADMIN_USERNAME}
-      - DEFAULT_ROLE_CODE=${DEFAULT_ROLE_CODE:-suplayer}
-      - WORLD_NAME=${WORLD_NAME:-Vintage Story World}
-      - WORLD_SEED=${WORLD_SEED}
-      - PLAY_STYLE=${PLAY_STYLE:-surviveandbuild}
-      - PASS_TIME_WHEN_EMPTY=${PASS_TIME_WHEN_EMPTY:-false}
-      - ALLOW_CREATIVE_MODE=${ALLOW_CREATIVE_MODE:-true}
-      - ALLOW_PVP=${ALLOW_PVP:-true}
-      - ALLOW_FALLING_BLOCKS=${ALLOW_FALLING_BLOCKS:-true}
-      - ALLOW_FIRE_SPREAD=${ALLOW_FIRE_SPREAD:-true}
-      - ANTI_ABUSE=${ANTI_ABUSE:-Off}
-      - WORLDCONFIG_GAME_MODE=${WORLD_MODE:-survival}
-      - WORLDCONFIG_MOVE_SPEED=${MOVE_SPEED:-1.5}
-      - WORLDCONFIG_PLAYER_HEALTH=${HEALTH:-15}
-      - WORLDCONFIG_HUNGER_SPEED=${HUNGER:-1}
-      - WORLDCONFIG_FOOD_SPOIL=${SPOIL:-1}
-      - WORLDCONFIG_TOOL_DURABILITY=${DURABILITY:-1}
-      - WORLDCONFIG_SAPLING_GROWTH=${SAPLINGS:-1}
-      - WORLDCONFIG_CREATURE_HOSTILITY=${HOSTILITY:-aggressive}
-      - WORLDCONFIG_DEATH_PUNISHMENT=${DEATH:-drop}
-      - WORLDCONFIG_TEMPORAL_STORMS=${STORMS:-sometimes}
-      - WORLDCONFIG_TEMPORAL_RIFTS=${RIFTS:-visible}
-      - WORLDCONFIG_ALLOW_MAP=${MAP:-true}
-      - WORLDCONFIG_ALLOW_COORDINATES=${COORDS:-true}
-      - WORLDCONFIG_WORLD_CLIMATE=${CLIMATE:-realistic}
-      - DATAPATH=/vintagestory/data
-      - HOMEPATH=/vintagestory
-      - VSPATH=/vintagestory/server
-      - SAVE_FILE_LOCATION=/vintagestory/data/Saves/default.vcdbs
-      - OPENAI_API_KEY=${OPENAI_KEY}
+      # (Note: CasaOS will still prompt for all other vars if they are in the image)
     stdin_open: true
     tty: true
-
 x-casaos:
   architectures:
     - amd64
   main: vintagestory
   icon: https://wiki.vintagestory.at/images/8/8a/Gamelogo-vintagestory.png
   title:
-    en_us: "Vintage Story (Josh's Cloud)"
+    en_us: "Vintage Story Custom"
   description:
-    en_us: "Full server build with all environment variables exposed."
-  port_map: "7681"
-  category: "Game"
-  developer: "JoshEvans-Weber"
+    en_us: "Server with June settings and terminal."
+  category: "Games"
+  developer: "Josh"
