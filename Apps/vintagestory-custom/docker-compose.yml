@@ -5,27 +5,30 @@ services:
     container_name: vs-server
     restart: always
     ports:
-      - "${SERVER_PORT:-42420}:42420/udp"
+      - "42420:42420/udp"
       - "7681:7681"
     volumes:
       - /DATA/AppData/vintagestory/data:/vintagestory/data
     environment:
       - WORLDCONFIG_MOVE_SPEED=${MOVE_SPEED:-1.5}
       - WORLDCONFIG_CREATURE_HOSTILITY=${HOSTILITY:-aggressive}
-      - OPENAI_API_KEY=${OPENAI_KEY}
       - UID_NUMBER=${UID_NUMBER:-1100}
       - GID_NUMBER=${GID_NUMBER:-1100}
-      # (Note: CasaOS will still prompt for all other vars if they are in the image)
+      - OPENAI_API_KEY=${OPENAI_KEY}
     stdin_open: true
     tty: true
+
 x-casaos:
   architectures:
     - amd64
   main: vintagestory
-  icon: https://wiki.vintagestory.at/images/8/8a/Gamelogo-vintagestory.png
+  icon: https://raw.githubusercontent.com/JoshEvans-Weber/casaos-store/main/Apps/vintagestory-custom/icon.png
+  screenshot_link:
+    - https://raw.githubusercontent.com/JoshEvans-Weber/casaos-store/main/Apps/vintagestory-custom/screenshot-1.png
   title:
-    en_us: "Vintage Story Custom"
+    en_us: "Vintage Story (Josh's Cloud)"
   description:
-    en_us: "Server with June settings and terminal."
+    en_us: "Custom server with terminal and June settings."
   category: "Games"
-  developer: "Josh"
+  developer: "JoshEvans-Weber"
+  port_map: "7681"
