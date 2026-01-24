@@ -2,6 +2,15 @@ name: vintagestory-custom
 services:
   vintagestory:
     image: ghcr.io/joshevans-weber/vs-custom:latest
+    container_name: vs-server
+    restart: always
+    stdin_open: true
+    tty: true
+    ports:
+      - "42420:42420/udp"
+      - "7681:7681"
+    volumes:
+      - /DATA/AppData/vintagestory/data:/vintagestory/data
     command: >
       dotnet /vintagestory/server/VintagestoryServer.dll 
       --dataPath /vintagestory/data 
@@ -11,16 +20,8 @@ services:
         \"creatureStrength\": ${WORLDCONFIG_CREATURE_STRENGTH:-1},
         \"daysPerMonth\": ${WORLDCONFIG_DAYS_PER_MONTH:-9}
       }"
-    container_name: vs-server
-    restart: always
-    ports:
-      - "42420:42420/udp"
-      - "7681:7681"
-    volumes:
-      - /DATA/AppData/vintagestory/data:/vintagestory/data
     environment:
-   environment:
-      # --- SERVER IDENTITY & CONNECTION ---
+      # --- SERVER IDENTITY ---
       - SERVER_NAME=Vintage Story Server
       - WORLD_NAME=Vintage Story World
       - WELCOME_MESSAGE=Welcome {0}, may you survive well and prosper
@@ -37,7 +38,7 @@ services:
       - PASS_TIME_WHEN_EMPTY=false
       - SERVER_IP=
       - SERVER_URL=
-      # --- GAMEPLAY & WORLD RULES ---
+      # --- GAMEPLAY & WORLD ---
       - PLAY_STYLE=surviveandbuild
       - WORLDCONFIG_GAME_MODE=survival
       - WORLDCONFIG_CREATURE_HOSTILITY=aggressive
@@ -59,43 +60,33 @@ services:
       - ALLOW_FALLING_BLOCKS=true
       - ANTI_ABUSE=Off
       - DEFAULT_ROLE_CODE=suplayer
-      # --- PLAYSTYLE & BASIC GEN ---
-      - PLAY_STYLE=surviveandbuild
       - WORLD_SEED=
       - WORLD_SIZE=1024000
-      - WORLDCONFIG_WORLD_CLIMATE=realistic
-      # --- ADVANCED GEOGRAPHY (Generation Only) ---
       - WORLDCONFIG_LANDCOVER=1.0
       - WORLDCONFIG_OCEANSCALE=1.0
       - WORLDCONFIG_POLAR_EQUATOR_DISTANCE=50000
       - WORLDCONFIG_LANDFORM_SCALE=1.0
       - WORLDCONFIG_UPHEAVAL_COMMONNESS=0.3
       - WORLDCONFIG_GEOLOGIC_ACTIVITY=0.05
-      # --- PLAYER STATS ---
       - WORLDCONFIG_PLAYER_MOVE_SPEED=1.5
       - WORLDCONFIG_PLAYER_HEALTH_POINTS=15
       - WORLDCONFIG_PLAYER_HUNGER_SPEED=1
       - WORLDCONFIG_PLAYER_HEALTH_REGEN_SPEED=1
       - WORLDCONFIG_LUNG_CAPACITY=40000
       - WORLDCONFIG_PLAYER_LIVES=-1
-      # --- CREATURES & COMBAT ---
-      - WORLDCONFIG_CREATURE_HOSTILITY=aggressive
       - WORLDCONFIG_CREATURE_STRENGTH=1
       - WORLDCONFIG_CREATURE_SWIM_SPEED=2
       - WORLDCONFIG_SPAWN_RADIUS=50
-      # --- SURVIVAL CHALLENGES ---
       - WORLDCONFIG_FOOD_SPOIL_SPEED=1
-      - WORLDCONFIG_TOOL_DURABILITY=1
       - WORLDCONFIG_TOOL_MINING_SPEED=1
       - WORLDCONFIG_GLOBAL_DEPOSIT_SPAWN_RATE=1
       - WORLDCONFIG_HARSH_WINTERS=true
       - WORLDCONFIG_BLOCK_GRAVITY=sandgravel
       - WORLDCONFIG_CAVE_INS=off
-      # --- TIME & SEASONS ---
       - WORLDCONFIG_DAYS_PER_MONTH=9
       - WORLDCONFIG_SEASONS=enabled
       - WORLDCONFIG_TEMPORAL_GEAR_RESPAWN_USES=20
-      # --- SYSTEM, PATHS & RESOURCES ---
+      # --- SYSTEM ---
       - OPENAI_API_KEY=sk-xxxxxx
       - DATAPATH=/vintagestory/data
       - HOMEPATH=/vintagestory
@@ -115,8 +106,6 @@ services:
       - PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
       - LANG=C.UTF-8
       - STARTUP_COMMANDS=
-    stdin_open: true
-    tty: true
 
 x-casaos:
   architectures:
@@ -133,79 +122,41 @@ x-casaos:
   developer: "JoshEvans-Weber"
   port_map: "7681"
   envs:
-    # --- Server Identity ---
     - container: SERVER_NAME
       label: "Server Name"
     - container: WORLD_NAME
       label: "World Name"
-    - container: WELCOME_MESSAGE
-      label: "Welcome Message"
     - container: MAX_CLIENTS
       label: "Max Players"
     - container: SERVER_PASSWORD
       label: "Server Password"
-    # --- Gameplay Rules ---
-    - container: WORLDCONFIG_GAME_MODE
-      label: "Game Mode (survival/creative)"
-    - container: WORLDCONFIG_CREATURE_HOSTILITY
-      label: "Creature Hostility"
-    - container: WORLDCONFIG_MOVE_SPEED
-      label: "Movement Speed"
-    - container: WORLDCONFIG_PLAYER_HEALTH
-      label: "Player Max Health"
-    - container: WORLDCONFIG_DEATH_PUNISHMENT
-      label: "Death Punishment (drop/keep)"
-    - container: ALLOW_PVP
-      label: "Enable PvP (true/false)"
-    - container: WORLDCONFIG_ALLOW_MAP
-      label: "Enable Map (true/false)"
-    # --- World Climate & Rifts ---
-    - container: WORLDCONFIG_WORLD_CLIMATE
-      label: "World Climate"
-    - container: WORLDCONFIG_TEMPORAL_RIFTS
-      label: "Temporal Rifts (visible/off)"
-    - container: WORLDCONFIG_TEMPORAL_STORMS
-      label: "Temporal Storms (off/veryrare/rare/sometimes/often/veryoften)"
-      x-casaos:
-  envs:
-    # --- Playstyle & Seed ---
     - container: PLAY_STYLE
       label: "Playstyle (surviveandbuild/exploration/wildernesssurvival)"
     - container: WORLD_SEED
-      label: "World Seed (Leave blank for random)"
-    # --- Map Scale ---
-    - container: WORLD_SIZE
-      label: "World Size in Blocks (Default 1,024,000)"
-    - container: WORLDCONFIG_POLAR_EQUATOR_DISTANCE
-      label: "Pole-to-Equator Distance (Blocks; smaller = faster biome changes)"
-    # --- Land & Oceans ---
-    - container: WORLDCONFIG_LANDCOVER
-      label: "Landcover (0.1 to 1.0; higher = more land)"
-    - container: WORLDCONFIG_OCEANSCALE
-      label: "Ocean Scale (0.1 to 4.0; higher = larger oceans)"
-    - container: WORLDCONFIG_LANDFORM_SCALE
-      label: "Landform Scale (0.5 to 1.5; scales mountains/valleys)"
-    # --- Player Labels ---
+      label: "World Seed (Blank for random)"
+    - container: WORLDCONFIG_GAME_MODE
+      label: "Game Mode (survival/creative)"
+    - container: WORLDCONFIG_CREATURE_HOSTILITY
+      label: "Creature Hostility (aggressive/passive/off)"
     - container: WORLDCONFIG_PLAYER_MOVE_SPEED
       label: "Run Speed Multiplier (Default 1.5)"
     - container: WORLDCONFIG_PLAYER_HEALTH_POINTS
       label: "Base Health (Default 15)"
     - container: WORLDCONFIG_PLAYER_LIVES
       label: "Player Lives (-1 for Infinite)"
-    # --- Combat Labels ---
-    - container: WORLDCONFIG_CREATURE_HOSTILITY
-      label: "Monster Aggression (aggressive/passive/off)"
-    - container: WORLDCONFIG_CREATURE_STRENGTH
-      label: "Monster Damage Multiplier (Default 1)"
-    # --- Survival Labels ---
-    - container: WORLDCONFIG_FOOD_SPOIL_SPEED
-      label: "Food Spoilage Speed (Lower = slower)"
-    - container: WORLDCONFIG_TOOL_DURABILITY
-      label: "Tool Durability Multiplier (Default 1)"
-    - container: WORLDCONFIG_GLOBAL_DEPOSIT_SPAWN_RATE
-      label: "Ore Spawn Rate (1 = 100%)"
+    - container: WORLDCONFIG_DEATH_PUNISHMENT
+      label: "Death Punishment (drop/keep)"
+    - container: ALLOW_PVP
+      label: "Enable PvP (true/false)"
+    - container: WORLDCONFIG_TEMPORAL_STORMS
+      label: "Temporal Storms (off/sometimes/often)"
+    - container: WORLD_SIZE
+      label: "World Size (Default 1,024,000)"
+    - container: WORLDCONFIG_POLAR_EQUATOR_DISTANCE
+      label: "Pole-to-Equator Distance (Blocks)"
+    - container: WORLDCONFIG_LANDCOVER
+      label: "Landcover (0.1 to 1.0)"
     - container: WORLDCONFIG_DAYS_PER_MONTH
       label: "Days Per Month (Default 9)"
-    # --- AI & Integration ---
     - container: OPENAI_API_KEY
       label: "OpenAI API Key"
