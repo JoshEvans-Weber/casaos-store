@@ -20,4 +20,4 @@ x-casaos:
   main: vintagestory
   title: { en_us: "Vintage Story (Custom)" }
   port_map: "7681"
-  version: "20260124-0944"
+  version: "20260124-0953"
