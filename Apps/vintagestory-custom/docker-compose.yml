@@ -11,24 +11,13 @@ services:
       - /DATA/AppData/vintagestory/data:/vintagestory/data
     environment:
       - SERVICE=VintagestoryServer.dll
-      - SERVER_NAME=${SERVER_NAME:-Vintage Story Server}
-      - WORLD_NAME=${WORLD_NAME:-default}
       - TERMINAL_USER=${TERMINAL_USER:-admin}
       - TERMINAL_PASS=${TERMINAL_PASS:-password}
     stdin_open: true
     tty: true
-
 x-casaos:
-  architectures:
-    - amd64
+  architectures: ["amd64"]
   main: vintagestory
-  icon: https://wiki.vintagestory.at/images/8/8a/Gamelogo-vintagestory.png
-  title:
-    en_us: "Vintage Story (Custom)"
-  description:
-    en_us: "Custom build with Web Terminal (ttyd/tmux)."
+  title: { en_us: "Vintage Story (Custom)" }
   port_map: "7681"
-  category: "Game"
-  developer: "Vintage Story Team"
-  author: "JoshEvans-Weber"
-  version: "20260124-0856"
+  version: "20260124-0917"
