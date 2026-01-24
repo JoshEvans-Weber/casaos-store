@@ -1,162 +1,40 @@
 name: vintagestory-custom
 services:
   vintagestory:
-    image: ghcr.io/joshevans-weber/vs-custom:latest
+    image: ghcr.io/joshevans-weber/vintagestory-custom:latest
     container_name: vs-server
     restart: always
-    stdin_open: true
-    tty: true
     ports:
       - "42420:42420/udp"
       - "7681:7681"
     volumes:
       - /DATA/AppData/vintagestory/data:/vintagestory/data
-    command: >
-      dotnet /vintagestory/server/VintagestoryServer.dll 
-      --dataPath /vintagestory/data 
-      --setconfig "{
-        \"playerMoveSpeed\": ${WORLDCONFIG_PLAYER_MOVE_SPEED:-1.5},
-        \"creatureHostility\": \"${WORLDCONFIG_CREATURE_HOSTILITY:-aggressive}\",
-        \"creatureStrength\": ${WORLDCONFIG_CREATURE_STRENGTH:-1},
-        \"daysPerMonth\": ${WORLDCONFIG_DAYS_PER_MONTH:-9}
-      }"
     environment:
-      # --- SERVER IDENTITY ---
-      - SERVER_NAME=Vintage Story Server
-      - WORLD_NAME=Vintage Story World
-      - WELCOME_MESSAGE=Welcome {0}, may you survive well and prosper
-      - SERVER_DESCRIPTION=
-      - SERVER_PASSWORD=
-      - SERVER_PORT=42420
-      - MAX_CLIENTS=16
-      - ADVERTISE_SERVER=false
-      - ONLY_WHITELISTED=false
-      - SERVER_UPNP=false
-      - SERVER_LANGUAGE=en
-      - MAX_CHUNK_RADIUS=12
-      - SERVER_COMPRESS_PACKETS=true
-      - PASS_TIME_WHEN_EMPTY=false
-      - SERVER_IP=
-      - SERVER_URL=
-      # --- GAMEPLAY & WORLD ---
-      - PLAY_STYLE=surviveandbuild
-      - WORLDCONFIG_GAME_MODE=survival
-      - WORLDCONFIG_CREATURE_HOSTILITY=aggressive
-      - WORLDCONFIG_DEATH_PUNISHMENT=drop
-      - WORLDCONFIG_MOVE_SPEED=1.5
-      - WORLDCONFIG_PLAYER_HEALTH=15
-      - WORLDCONFIG_HUNGER_SPEED=1
-      - WORLDCONFIG_FOOD_SPOIL=1
-      - WORLDCONFIG_TOOL_DURABILITY=1
-      - WORLDCONFIG_SAPLING_GROWTH=1
-      - WORLDCONFIG_WORLD_CLIMATE=realistic
-      - WORLDCONFIG_ALLOW_MAP=true
-      - WORLDCONFIG_ALLOW_COORDINATES=true
-      - WORLDCONFIG_TEMPORAL_RIFTS=visible
-      - WORLDCONFIG_TEMPORAL_STORMS=sometimes
-      - ALLOW_CREATIVE_MODE=true
-      - ALLOW_PVP=true
-      - ALLOW_FIRE_SPREAD=true
-      - ALLOW_FALLING_BLOCKS=true
-      - ANTI_ABUSE=Off
-      - DEFAULT_ROLE_CODE=suplayer
-      - WORLD_SEED=
-      - WORLD_SIZE=1024000
-      - WORLDCONFIG_LANDCOVER=1.0
-      - WORLDCONFIG_OCEANSCALE=1.0
-      - WORLDCONFIG_POLAR_EQUATOR_DISTANCE=50000
-      - WORLDCONFIG_LANDFORM_SCALE=1.0
-      - WORLDCONFIG_UPHEAVAL_COMMONNESS=0.3
-      - WORLDCONFIG_GEOLOGIC_ACTIVITY=0.05
-      - WORLDCONFIG_PLAYER_MOVE_SPEED=1.5
-      - WORLDCONFIG_PLAYER_HEALTH_POINTS=15
-      - WORLDCONFIG_PLAYER_HUNGER_SPEED=1
-      - WORLDCONFIG_PLAYER_HEALTH_REGEN_SPEED=1
-      - WORLDCONFIG_LUNG_CAPACITY=40000
-      - WORLDCONFIG_PLAYER_LIVES=-1
-      - WORLDCONFIG_CREATURE_STRENGTH=1
-      - WORLDCONFIG_CREATURE_SWIM_SPEED=2
-      - WORLDCONFIG_SPAWN_RADIUS=50
-      - WORLDCONFIG_FOOD_SPOIL_SPEED=1
-      - WORLDCONFIG_TOOL_MINING_SPEED=1
-      - WORLDCONFIG_GLOBAL_DEPOSIT_SPAWN_RATE=1
-      - WORLDCONFIG_HARSH_WINTERS=true
-      - WORLDCONFIG_BLOCK_GRAVITY=sandgravel
-      - WORLDCONFIG_CAVE_INS=off
-      - WORLDCONFIG_DAYS_PER_MONTH=9
-      - WORLDCONFIG_SEASONS=enabled
-      - WORLDCONFIG_TEMPORAL_GEAR_RESPAWN_USES=20
-      # --- SYSTEM ---
-      - OPENAI_API_KEY=sk-xxxxxx
-      - DATAPATH=/vintagestory/data
-      - HOMEPATH=/vintagestory
-      - VSPATH=/vintagestory/server
-      - SAVE_FILE_LOCATION=/vintagestory/data/Saves/default.vcdbs
-      - SERVICE=/vintagestory/server/VintagestoryServer.dll
+      - SERVER_NAME=${SERVER_NAME:-Vintage Story Server}
+      - MAX_CLIENTS=${MAX_CLIENTS:-16}
+      - WORLD_NAME=${WORLD_NAME:-default}
+      - WORLDCONFIG_MOVE_SPEED=${MOVE_SPEED:-1.5}
+      - TERMINAL_USER=${TERMINAL_USER:-admin}
+      - TERMINAL_PASS=${TERMINAL_PASS:-password}
       - UID_NUMBER=1100
       - GID_NUMBER=1100
-      - USERNAME=vintagestory
-      - VS_VERSION=1.21.6
-      - DOTNET_VERSION=8.0
-      - DOTNET_gcServer=1
-      - DOTNET_GCHeapHardLimit=0x280000000
-      - PYTHON_VERSION=3.10.19
-      - PYTHON_SHA256=c8f4a596572201d81dd7df91f70e177e19a70f1d489968b54b5fbbf29a97c076
-      - GPG_KEY=A035C8C19219BA821ECEA86B64E628F8D684696D
-      - PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-      - LANG=C.UTF-8
-      - STARTUP_COMMANDS=
+    stdin_open: true
+    tty: true
 
 x-casaos:
-  architectures:
-    - amd64
+  architectures: ["amd64"]
   main: vintagestory
-  icon: https://raw.githubusercontent.com/JoshEvans-Weber/casaos-store/main/Apps/vintagestory-custom/icon.png
-  screenshot_link:
-    - https://raw.githubusercontent.com/JoshEvans-Weber/casaos-store/main/Apps/vintagestory-custom/screenshot-1.png
+  icon: https://wiki.vintagestory.at/images/8/8a/Gamelogo-vintagestory.png
   title:
-    en_us: "Vintage Story (Josh's Cloud)"
+    en_us: "Vintage Story (Custom)"
   description:
-    en_us: "Custom server with exposed terminal"
-  category: "Games"
-  developer: "JoshEvans-Weber"
+    en_us: "Custom build with Web Terminal (ttyd/tmux)."
   port_map: "7681"
+  category: "Game"
   envs:
-    - container: SERVER_NAME
-      label: "Server Name"
-    - container: WORLD_NAME
-      label: "World Name"
-    - container: MAX_CLIENTS
-      label: "Max Players"
-    - container: SERVER_PASSWORD
-      label: "Server Password"
-    - container: PLAY_STYLE
-      label: "Playstyle (surviveandbuild/exploration/wildernesssurvival)"
-    - container: WORLD_SEED
-      label: "World Seed (Blank for random)"
-    - container: WORLDCONFIG_GAME_MODE
-      label: "Game Mode (survival/creative)"
-    - container: WORLDCONFIG_CREATURE_HOSTILITY
-      label: "Creature Hostility (aggressive/passive/off)"
-    - container: WORLDCONFIG_PLAYER_MOVE_SPEED
-      label: "Run Speed Multiplier (Default 1.5)"
-    - container: WORLDCONFIG_PLAYER_HEALTH_POINTS
-      label: "Base Health (Default 15)"
-    - container: WORLDCONFIG_PLAYER_LIVES
-      label: "Player Lives (-1 for Infinite)"
-    - container: WORLDCONFIG_DEATH_PUNISHMENT
-      label: "Death Punishment (drop/keep)"
-    - container: ALLOW_PVP
-      label: "Enable PvP (true/false)"
-    - container: WORLDCONFIG_TEMPORAL_STORMS
-      label: "Temporal Storms (off/sometimes/often)"
-    - container: WORLD_SIZE
-      label: "World Size (Default 1,024,000)"
-    - container: WORLDCONFIG_POLAR_EQUATOR_DISTANCE
-      label: "Pole-to-Equator Distance (Blocks)"
-    - container: WORLDCONFIG_LANDCOVER
-      label: "Landcover (0.1 to 1.0)"
-    - container: WORLDCONFIG_DAYS_PER_MONTH
-      label: "Days Per Month (Default 9)"
-    - container: OPENAI_API_KEY
-      label: "OpenAI API Key"
+    - container: TERMINAL_USER
+      description: { en_us: "Username for Web Terminal" }
+    - container: TERMINAL_PASS
+      description: { en_us: "Password for Web Terminal" }
+    - container: MOVE_SPEED
+      description: { en_us: "Player Move Speed" }
