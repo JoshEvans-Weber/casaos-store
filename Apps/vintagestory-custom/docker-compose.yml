@@ -10,8 +10,28 @@ services:
     volumes:
       - /DATA/AppData/vintagestory/data:/vintagestory/data
     environment:
-      - WORLDCONFIG_MOVE_SPEED=${MOVE_SPEED:-1.5}
+    # --- SERVER IDENTITY ---
+      - SERVER_NAME=${SERVER_NAME:-Vintage Story Server}
+      - WORLD_NAME=${WORLD_NAME:-Vintage Story World}
+      - WELCOME_MESSAGE=${WELCOME_MESSAGE:-Welcome {0}, may you survive well and prosper}
+      - SERVER_DESCRIPTION=${SERVER_DESCRIPTION}
+      - SERVER_PASSWORD=${SERVER_PASSWORD}
+      # --- CORE GAMEPLAY ---
+      - PLAY_STYLE=${PLAY_STYLE:-surviveandbuild}
+      - WORLDCONFIG_GAME_MODE=${GAME_MODE:-survival}
       - WORLDCONFIG_CREATURE_HOSTILITY=${HOSTILITY:-aggressive}
+      - WORLDCONFIG_MOVE_SPEED=${MOVE_SPEED:-1.5}
+      - WORLDCONFIG_PLAYER_HEALTH=${PLAYER_HEALTH:-15}
+      - WORLDCONFIG_DEATH_PUNISHMENT=${DEATH_PUNISHMENT:-drop}
+      # --- WORLD RULES ---
+      - ALLOW_CREATIVE_MODE=${ALLOW_CREATIVE_MODE:-false}
+      - ALLOW_PVP=${ALLOW_PVP:-true}
+      - ALLOW_FIRE_SPREAD=${ALLOW_FIRE_SPREAD:-true}
+      - WORLDCONFIG_ALLOW_MAP=${ALLOW_MAP:-true}
+      - WORLDCONFIG_ALLOW_COORDINATES=${ALLOW_COORDS:-true}
+      - WORLDCONFIG_TEMPORAL_STORMS=${TEMPORAL_STORMS:-sometimes}
+      - MAX_CLIENTS=${MAX_CLIENTS:-9999}
+      - SAVE_FILE_LOCATION=${SAVE_FILE_LOCATION:-/vintagestory/data/Saves/default.vcdbs}
       - UID_NUMBER=${UID_NUMBER:-1100}
       - GID_NUMBER=${GID_NUMBER:-1100}
       - OPENAI_API_KEY=${OPENAI_KEY}
