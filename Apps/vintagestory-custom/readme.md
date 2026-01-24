@@ -1,187 +1,69 @@
 Vintage Story Custom Server (CasaOS Edition)
 
-This is a high-performance, fully customizable Vintage Story server container. It has been built to expose the "World Creation" screen settings directly into the CasaOS dashboard, allowing for granular control over gameplay, difficulty, and world generation without ever touching a JSON file.
+This repository contains the custom deployment logic and CasaOS App Store manifest for a hardened, feature-rich Vintage Story server. It bridges the gap between the high-performance base container and the ease-of-use required for a modern homeserver.
 
-Getting Started
+Project Architecture
 
-Installation: Click Install from your custom CasaOS store.
+We have modified the original container to include a dual-service management system:
 
-Configuration: During the "Custom Install" or later in "Settings," you can adjust the variables listed below.
+The Game Engine: Running inside a persistent tmux session to allow for interactive console commands.
 
-First Boot: Settings in the World Generation section will only apply if a new world is being created. To reset your world and apply new generation settings, delete the files in your /Saves folder or change the WORLD_NAME.
+The Web Terminal: Powered by ttyd, providing a secure, browser-based CLI on port 7681.
 
-🛠 Configuration Reference
+Process Management: A custom entrypoint.sh that handles permission switching (gosu), automatic configuration generation, and log tailing.
 
-Server Identity
+Source Origins
 
-Variable
+Base Image: DarkMatterProductions/vintagestory
 
-Default
+Custom Image: ghcr.io/joshevans-weber/vintagestory-custom
 
-Description
+App Store: JoshEvans-Weber/casaos-store
 
-SERVER_NAME
+Features & Support
 
-Vintage Story Server
+Current Capabilities
 
-The name shown in the server browser.
+Interactive Console: Type game commands directly into the CasaOS Terminal button.
 
-WORLD_NAME
+Custom Login: Secure terminal access via TERMINAL_USER and TERMINAL_PASS.
 
-Vintage Story World
+Auto-Healing: The container stays alive even if the game crashes, allowing you to debug via the console.
 
-The name of the save file. Changing this triggers a new world.
+Dynamic World Settings: Move speed, hostility, and monthly cycles are exposed as CasaOS variables.
 
-MAX_CLIENTS
+Ongoing Maintenance Plan
 
-16
+To keep this container stable and modern, we will continue to:
 
-Maximum number of simultaneous players.
+Monitor Upstream: Ensure compatibility with new Vintage Story versions (Stable & Unstable).
 
-SERVER_PASSWORD
+Refine CLI Logic: Improve the tmux attachment stability to prevent "Inappropriate ioctl" errors.
 
-(Empty)
+Expand Metadata: Add more world-generation toggles to the CasaOS UI as they become available in the server API.
 
-Leave blank for no password.
+Security Patches: Regularly update the ttyd and dotnet dependencies within the build script.
 
-Gameplay & Combat
+How to Manage the Server
 
-Variable
+Administration
 
-Valid Inputs
+To Admin: Open the Terminal in CasaOS and log in with your credentials. You are automatically attached to the live game session.
 
-Description
+To Reset: Change the WORLD_NAME in settings or delete the contents of /vintagestory/data/Saves.
 
-PLAY_STYLE
+Logs: View the live server logs directly through the CasaOS "Logs" interface for easy monitoring.
 
-surviveandbuild, wildernesssurvival, exploration
+Credits & Acknowledgments
 
-surviveandbuild: Balanced. wildernesssurvival: Hardcore/Random spawns. exploration: No combat.
+This project is made possible by the incredible work of the following teams:
 
-WORLDCONFIG_GAME_MODE
+Aneuclist (Vintage Story Devs): For creating one of the most deep and atmospheric survival games available.
 
-survival, creative
+DarkMatterProductions: For the original community Docker implementation that serves as our base.
 
-Sets the default mode for all players.
+The Tmux Team: For the terminal multiplexer that keeps our game session alive in the background.
 
-WORLDCONFIG_CREATURE_HOSTILITY
+ttyd (Tsai Shu-hung): For the web-to-terminal bridge that powers our browser-based CLI.
 
-aggressive, passive, off
-
-Determines if mobs hunt you, ignore you, or don't exist.
-
-WORLDCONFIG_DEATH_PUNISHMENT
-
-drop, keep
-
-drop: Inventory drops on ground. keep: Inventory stays with player.
-
-ALLOW_PVP
-
-true, false
-
-Enables or disables player-vs-player combat.
-
-Player Stats
-
-Variable
-
-Default
-
-Description
-
-WORLDCONFIG_PLAYER_MOVE_SPEED
-
-1.5
-
-Multiplier for running/walking speed.
-
-WORLDCONFIG_PLAYER_HEALTH_POINTS
-
-15
-
-The base HP of a player.
-
-WORLDCONFIG_PLAYER_LIVES
-
--1
-
-Number of lives before permanent death. -1 is infinite.
-
-WORLDCONFIG_FOOD_SPOIL_SPEED
-
-1
-
-0.5 is twice as slow, 2.0 is twice as fast.
-
-World & Environment
-
-Variable
-
-Valid Inputs
-
-Description
-
-WORLDCONFIG_TEMPORAL_STORMS
-
-off, sometimes, often, veryoften
-
-Frequency of glitch storms.
-
-WORLDCONFIG_TEMPORAL_RIFTS
-
-visible, invisible, off
-
-Whether rifts appear and drain stability.
-
-WORLDCONFIG_DAYS_PER_MONTH
-
-9
-
-Length of a month. Higher values make seasons last longer.
-
-WORLDCONFIG_HARSH_WINTERS
-
-true, false
-
-Whether winter temperatures kill crops and reduce wildlife.
-
-World Generation (Requires New World)
-
-Variable
-
-Default
-
-Description
-
-WORLD_SEED
-
-(Random)
-
-Specific seed for world generation.
-
-WORLD_SIZE
-
-1024000
-
-Total map size in blocks.
-
-WORLDCONFIG_LANDCOVER
-
-1.0
-
-0.1 (mostly ocean) to 1.0 (all land).
-
-WORLDCONFIG_POLAR_EQUATOR_DISTANCE
-
-50000
-
-Distance between climates. Lower = biomes change faster.
-
-Technical Support
-
-Terminal Access: You can access the game console via the CasaOS terminal to use commands like /op or /kick.
-
-AI Integration: To use the automated admin/NPC features, provide a valid OpenAI API key in the OPENAI_API_KEY field.
-
-Applying Changes: Most changes require a container restart. World generation changes require a fresh save file.
+Maintained by JoshEvans-Weber
