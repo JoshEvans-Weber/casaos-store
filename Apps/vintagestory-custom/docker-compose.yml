@@ -1,4 +1,4 @@
-name: vintagestory-custom
+name: "vintagestory-custom"
 services:
   vintagestory:
     image: ghcr.io/joshevans-weber/vintagestory-custom:latest
@@ -13,16 +13,14 @@ services:
       - SERVER_NAME=${SERVER_NAME:-Vintage Story Server}
       - MAX_CLIENTS=${MAX_CLIENTS:-16}
       - WORLD_NAME=${WORLD_NAME:-default}
-      - WORLDCONFIG_MOVE_SPEED=${MOVE_SPEED:-1.5}
       - TERMINAL_USER=${TERMINAL_USER:-admin}
       - TERMINAL_PASS=${TERMINAL_PASS:-password}
-      - UID_NUMBER=1100
-      - GID_NUMBER=1100
     stdin_open: true
     tty: true
 
 x-casaos:
-  architectures: ["amd64"]
+  architectures:
+    - amd64
   main: vintagestory
   icon: https://wiki.vintagestory.at/images/8/8a/Gamelogo-vintagestory.png
   title:
@@ -31,10 +29,5 @@ x-casaos:
     en_us: "Custom build with Web Terminal (ttyd/tmux)."
   port_map: "7681"
   category: "Game"
-  envs:
-    - container: TERMINAL_USER
-      description: { en_us: "Username for Web Terminal" }
-    - container: TERMINAL_PASS
-      description: { en_us: "Password for Web Terminal" }
-    - container: MOVE_SPEED
-      description: { en_us: "Player Move Speed" }
+  developer: "Vintage Story Team"
+  author: "JoshEvans-Weber"
