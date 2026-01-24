@@ -16,4 +16,4 @@ x-casaos:
   architectures: ["amd64"]
   main: vintagestory
   title: { en_us: "Vintage Story (Baseline)" }
-  version: "20260124-1006"
+  version: "20260124-1010"
