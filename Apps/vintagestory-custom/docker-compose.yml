@@ -10,8 +10,8 @@ services:
     volumes:
       - /DATA/AppData/vintagestory/data:/vintagestory/data
     environment:
+      - SERVICE=VintagestoryServer.dll
       - SERVER_NAME=${SERVER_NAME:-Vintage Story Server}
-      - MAX_CLIENTS=${MAX_CLIENTS:-16}
       - WORLD_NAME=${WORLD_NAME:-default}
       - TERMINAL_USER=${TERMINAL_USER:-admin}
       - TERMINAL_PASS=${TERMINAL_PASS:-password}
@@ -31,3 +31,4 @@ x-casaos:
   category: "Game"
   developer: "Vintage Story Team"
   author: "JoshEvans-Weber"
+  version: "20260124-0836"
