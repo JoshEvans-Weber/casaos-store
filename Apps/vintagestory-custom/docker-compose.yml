@@ -4,6 +4,7 @@ services:
     image: ghcr.io/joshevans-weber/vintagestory-custom:latest
     container_name: vs-server
     restart: unless-stopped
+    network_mode: bridge
     ports:
       - "42420:42420/udp"
       - "7681:7681/tcp"
@@ -34,7 +35,7 @@ x-casaos:
   icon: "https://www.vintagestory.at/img/vintagestory-logo.png"
   author: "JoshEvans-Weber"
   category: "Games"
-  version: "20260125-0240"
+  version: "20260125-0453"
   tagline:
     en_us: "Vintage Story dedicated server with web console"
   description:
