@@ -20,10 +20,10 @@
         "en_us": "Enhanced with web console & auto-restart"
       },
       "category": "Games",
-      "version": "20260125-1057",
-      "updated": "2026-01-25T10:57:15.237245",
+      "version": "20260125-1100",
+      "updated": "2026-01-25T11:00:28.929615",
       "image": {
-        "amd64": "ghcr.io/joshevans-weber/vintagestory-custom:20260125-1057"
+        "amd64": "ghcr.io/joshevans-weber/vintagestory-custom:20260125-1100"
       }
     },
     {
