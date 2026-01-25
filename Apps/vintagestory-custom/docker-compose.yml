@@ -20,11 +20,16 @@ services:
 x-casaos:
   architectures: ["amd64"]
   main: vintagestory
-  title: { en_us: "Vintage Story (Auto-Heal)" }
+  title:
+    en_us: "Vintage Story (Auto-Heal)"
   icon: "https://raw.githubusercontent.com/JoshEvans-Weber/vintagestory-custom/main/icon.png"
-  screenshot_link: ["https://raw.githubusercontent.com/JoshEvans-Weber/vintagestory-custom/main/screen.png"]
-  tagline: { en_us: "Self-healing Vintage Story server with web console." }
+  screenshot_link:
+    - "https://raw.githubusercontent.com/JoshEvans-Weber/vintagestory-custom/main/screen.png"
+  tagline:
+    en_us: "Hardened Vintage Story server with recovery logic and web console."
   author: "JoshEvans-Weber"
   category: "Games"
-  description: { en_us: "Hardened Vintage Story server. Features: JSON recovery, vanilla mod audit, and ttyd console." }
-  version: "20260125-0011"
+  developer: "Vintage Story Team / JoshEvans-Weber"
+  description:
+    en_us: "A production-ready Vintage Story server. Automatically recovers from malformed JSON, restores missing vanilla mods, and provides a web-based interactive console via ttyd."
+  version: "20260125-0013"
