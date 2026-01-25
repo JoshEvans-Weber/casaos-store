@@ -4,10 +4,12 @@ services:
     image: ghcr.io/joshevans-weber/vintagestory-custom:latest
     container_name: vs-server
     restart: unless-stopped
-    network_mode: bridge
+    # Bridge network is the default - explicitly setting it here for clarity
+    # Ports will be mapped from container to host via Docker's port forwarding
     ports:
-      - "42420:42420/udp"
-      - "7681:7681/tcp"
+      - "0.0.0.0:42420:42420/udp"
+      - "0.0.0.0:7681:7681/tcp"
+      - "0.0.0.0:5000:5000/tcp"
     volumes:
       - type: bind
         source: /DATA/AppData/vintagestory/data
@@ -35,7 +37,7 @@ x-casaos:
   icon: "https://www.vintagestory.at/img/vintagestory-logo.png"
   author: "JoshEvans-Weber"
   category: "Games"
-  version: "20260125-0506"
+  version: "20260125-0515"
   tagline:
     en_us: "Vintage Story dedicated server with web console"
   description:
