@@ -1,0 +1,18 @@
+{
+  "name": "JoshEvans-Weber's Personal Store",
+  "category_list": [
+    { "name": "Games", "font": "gamepad" }
+  ],
+  "recommend": [
+    "vintagestory-custom"
+  ],
+  "apps": [
+    {
+      "name": "vintagestory-custom",
+      "title": { "en_us": "Vintage Story (Auto-Heal)" },
+      "icon": "https://raw.githubusercontent.com/JoshEvans-Weber/vintagestory-custom/main/icon.png",
+      "tagline": { "en_us": "Hardened VS Server" },
+      "category": "Games"
+    }
+  ]
+}

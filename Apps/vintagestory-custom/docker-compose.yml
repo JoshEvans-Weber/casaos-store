@@ -26,10 +26,10 @@ x-casaos:
   screenshot_link:
     - "https://raw.githubusercontent.com/JoshEvans-Weber/vintagestory-custom/main/screen.png"
   tagline:
-    en_us: "Hardened Vintage Story server with recovery logic and web console."
+    en_us: "Hardened Vintage Story server with recovery logic."
   author: "JoshEvans-Weber"
   category: "Games"
-  developer: "Vintage Story Team / JoshEvans-Weber"
+  developer: "Vintage Story Team"
   description:
-    en_us: "A production-ready Vintage Story server. Automatically recovers from malformed JSON, restores missing vanilla mods, and provides a web-based interactive console via ttyd."
-  version: "20260125-0013"
+    en_us: "Production-ready Vintage Story server. Automatically recovers from malformed JSON."
+  version: "20260125-0018"
