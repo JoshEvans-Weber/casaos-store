@@ -32,4 +32,4 @@ x-casaos:
   developer: "Vintage Story Team"
   description:
     en_us: "Production-ready Vintage Story server. Automatically recovers from malformed JSON."
-  version: "20260125-0018"
+  version: "20260125-0021"
