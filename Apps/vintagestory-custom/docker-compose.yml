@@ -6,14 +6,19 @@ services:
     restart: always
     ports:
       - "42420:42420/udp"
+      - "7681:7681/tcp"
     volumes:
       - /DATA/AppData/vintagestory/data:/vintagestory/data
     environment:
       - SERVICE=VintagestoryServer.dll
+      - UID_NUMBER=1100
+      - GID_NUMBER=1100
     stdin_open: true
     tty: true
 x-casaos:
   architectures: ["amd64"]
   main: vintagestory
-  title: { en_us: "Vintage Story (Baseline)" }
-  version: "20260124-1022"
+  title: { en_us: "Vintage Story (Auto-Heal)" }
+  version: "20260124-2359"
+  category: "Games"
+  description: { en_us: "Includes JSON validation, template generation, vanilla mod recovery, and web console." }
