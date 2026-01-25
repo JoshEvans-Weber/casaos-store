@@ -23,13 +23,6 @@ x-casaos:
   title:
     en_us: "Vintage Story (Auto-Heal)"
   icon: "https://raw.githubusercontent.com/JoshEvans-Weber/vintagestory-custom/main/icon.png"
-  screenshot_link:
-    - "https://raw.githubusercontent.com/JoshEvans-Weber/vintagestory-custom/main/screen.png"
-  tagline:
-    en_us: "Hardened Vintage Story server with recovery logic."
   author: "JoshEvans-Weber"
   category: "Games"
-  developer: "Vintage Story Team"
-  description:
-    en_us: "Production-ready Vintage Story server. Automatically recovers from malformed JSON."
-  version: "20260125-0021"
+  version: "20260125-0028"
