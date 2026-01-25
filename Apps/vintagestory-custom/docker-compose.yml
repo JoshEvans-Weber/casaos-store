@@ -13,12 +13,18 @@ services:
       - SERVICE=VintagestoryServer.dll
       - UID_NUMBER=1100
       - GID_NUMBER=1100
+      - TERMINAL_USER=evans
+      - TERMINAL_PASS=camp3rjake
     stdin_open: true
     tty: true
 x-casaos:
   architectures: ["amd64"]
   main: vintagestory
   title: { en_us: "Vintage Story (Auto-Heal)" }
-  version: "20260125-0004"
+  icon: "https://raw.githubusercontent.com/JoshEvans-Weber/vintagestory-custom/main/icon.png"
+  screenshot_link: ["https://raw.githubusercontent.com/JoshEvans-Weber/vintagestory-custom/main/screen.png"]
+  tagline: { en_us: "Self-healing Vintage Story server with web console." }
+  author: "JoshEvans-Weber"
   category: "Games"
-  description: { en_us: "Includes JSON validation, template generation, vanilla mod recovery, and web console." }
+  description: { en_us: "Hardened Vintage Story server. Features: JSON recovery, vanilla mod audit, and ttyd console." }
+  version: "20260125-0011"
