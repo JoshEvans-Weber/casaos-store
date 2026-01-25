@@ -34,10 +34,10 @@ x-casaos:
   main: vintagestory
   title:
     en_us: "VintageStory"
-  icon: "https://github.com/JoshEvans-Weber/casaos-store/blob/main/Apps/vintagestory-custom/icon.png"
+  icon: "https://raw.githubusercontent.com/JoshEvans-Weber/casaos-store/main/Apps/vintagestory-custom/icon.png"
   author: "JoshEvans-Weber"
   category: "Games"
-  version: "20260125-0531"
+  version: "20260125-0535"
   tagline:
     en_us: "Vintage Story dedicated server with web console"
   description:
