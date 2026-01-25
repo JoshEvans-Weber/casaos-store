@@ -22,7 +22,7 @@ x-casaos:
   icon: "https://raw.githubusercontent.com/JoshEvans-Weber/casaos-store/main/Apps/vintagestory-original/icon.png"
   author: "JoshEvans-Weber"
   category: "Games"
-  version: "20260125-0700"
+  version: "20260125-0707"
   tagline:
     en_us: "Original Vintage Story dedicated server (unmodified)"
   description:
