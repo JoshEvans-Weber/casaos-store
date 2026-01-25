@@ -1,7 +1,10 @@
 {
   "name": "JoshEvans-Weber's Personal Store",
   "category_list": [
-    { "name": "Games", "font": "gamepad" }
+    {
+      "name": "Games",
+      "font": "gamepad"
+    }
   ],
   "recommend": [
     "vintagestory-custom"
@@ -9,9 +12,24 @@
   "apps": [
     {
       "name": "vintagestory-custom",
-      "title": { "en_us": "Vintage Story (Auto-Heal)" },
+      "title": {
+        "en_us": "Vintage Story (Auto-Heal)"
+      },
       "icon": "https://raw.githubusercontent.com/JoshEvans-Weber/vintagestory-custom/main/icon.png",
-      "tagline": { "en_us": "Hardened VS Server" },
+      "tagline": {
+        "en_us": "Hardened VS Server"
+      },
+      "category": "Games"
+    },
+    {
+      "name": "vintagestory-original",
+      "title": {
+        "en_us": "Vintage Story (Original)"
+      },
+      "icon": "https://raw.githubusercontent.com/JoshEvans-Weber/casaos-store/main/Apps/vintagestory-original/icon.png",
+      "tagline": {
+        "en_us": "Original unmodified server"
+      },
       "category": "Games"
     }
   ]
