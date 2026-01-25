@@ -119,6 +119,11 @@ docker start vs-server
 # View logs
 docker logs vs-server -f
 
+# Send commands to server console
+docker exec vs-server vs-command help
+docker exec vs-server vs-command "time"
+docker exec vs-server vs-command "status"
+
 # Restart server
 docker restart vs-server
 
@@ -132,7 +137,7 @@ docker stop vs-server
 docker start vs-server
 
 # Attach to tmux console directly
-docker exec -it vs-server gosu 1100:1100 tmux -S /tmp/vs.sock attach -t vs
+docker exec -it vs-server tmux -S /tmp/vs.sock attach -t vs
 # (Use Ctrl+B then D to detach)
 ```
 
