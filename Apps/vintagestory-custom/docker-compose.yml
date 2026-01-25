@@ -4,12 +4,9 @@ services:
     image: ghcr.io/joshevans-weber/vintagestory-custom:latest
     container_name: vs-server
     restart: unless-stopped
-    # Bridge network is the default - explicitly setting it here for clarity
-    # Ports will be mapped from container to host via Docker's port forwarding
     ports:
       - "0.0.0.0:42420:42420/udp"
       - "0.0.0.0:7681:7681/tcp"
-      - "0.0.0.0:5000:5000/tcp"
     volumes:
       - type: bind
         source: /DATA/AppData/vintagestory/data
@@ -22,9 +19,9 @@ services:
       - TERMINAL_PASS=camp3rjake
     stdin_open: true
     tty: true
-    user: "0:0"  # Start as root to fix permissions, then drop to UID_NUMBER
+    user: "0:0"
     healthcheck:
-      test: ["CMD-SHELL", "pgrep -f VintagestoryServer > /dev/null && echo 'OK' || (pgrep -f dotnet > /dev/null && echo 'Starting' || exit 1)"]
+      test: ["CMD-SHELL", "pgrep -f VintagestoryServer > /dev/null && echo OK || exit 1"]
       interval: 30s
       timeout: 10s
       retries: 5
@@ -37,17 +34,17 @@ x-casaos:
   icon: "https://raw.githubusercontent.com/JoshEvans-Weber/casaos-store/main/Apps/vintagestory-custom/icon.png"
   author: "JoshEvans-Weber"
   category: "Games"
-  version: "20260125-1103"
+  version: "20260125-1952"
   tagline:
-    en_us: "Vintage Story dedicated server with web console"
+    en_us: "Dedicated server with web console"
   description:
     en_us: |
-      Vintage Story dedicated server with tmux and ttyd for web-based console access.
+      Vintage Story dedicated server with web console access via ttyd.
       
       🎮 Game Port: 42420/udp
-      🌐 Web Console: http://your-ip:7681 (user: evans, pass: camp3rjake)
+      🌐 Web Console: http://your-ip:7681
       
-      The server will automatically create and configure the data directory on first run.
+      Default credentials: evans / camp3rjake
   developer: "Anego Studios"
   website: "https://www.vintagestory.at/"
   port_map: "7681"
