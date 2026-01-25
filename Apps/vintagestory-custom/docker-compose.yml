@@ -17,6 +17,12 @@ services:
       - TERMINAL_PASS=camp3rjake
     stdin_open: true
     tty: true
+    healthcheck:
+      test: ["CMD-SHELL", "netstat -uln | grep 42420 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
 x-casaos:
   architectures: ["amd64"]
   main: vintagestory
@@ -25,4 +31,14 @@ x-casaos:
   icon: "https://raw.githubusercontent.com/JoshEvans-Weber/vintagestory-custom/main/icon.png"
   author: "JoshEvans-Weber"
   category: "Games"
-  version: "20260125-0034"
+  version: "20260125-0053"
+  tagline:
+    en_us: "Vintage Story server with web console access"
+  description:
+    en_us: "Vintage Story dedicated server with tmux and ttyd for web-based console access at port 7681. Access web terminal at http://your-ip:7681 (user: evans, pass: camp3rjake)"
+  developer: "Anego Studios"
+  website: "https://www.vintagestory.at/"
+  containers:
+    - name: vintagestory
+      image: ghcr.io/joshevans-weber/vintagestory-custom:latest
+      shell: bash
