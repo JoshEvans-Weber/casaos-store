@@ -19,6 +19,6 @@ x-casaos:
   architectures: ["amd64"]
   main: vintagestory
   title: { en_us: "Vintage Story (Auto-Heal)" }
-  version: "20260124-2359"
+  version: "20260125-0004"
   category: "Games"
   description: { en_us: "Includes JSON validation, template generation, vanilla mod recovery, and web console." }
