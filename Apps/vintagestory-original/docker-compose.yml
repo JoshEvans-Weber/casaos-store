@@ -1,0 +1,38 @@
+name: "vintagestory-original"
+services:
+  vintagestory:
+    image: ghcr.io/joshevans-weber/vintagestory-original:latest
+    container_name: vs-original
+    restart: unless-stopped
+    ports:
+      - "0.0.0.0:42420:42420/udp"
+      - "0.0.0.0:7681:7681/tcp"
+      - "0.0.0.0:5000:5000/tcp"
+    volumes:
+      - type: bind
+        source: /DATA/AppData/vintagestory-original/data
+        target: /vintagestory/data
+    stdin_open: true
+    tty: true
+x-casaos:
+  architectures: ["amd64"]
+  main: vintagestory
+  title:
+    en_us: "VintageStory (Original)"
+  icon: "https://raw.githubusercontent.com/JoshEvans-Weber/casaos-store/main/Apps/vintagestory-original/icon.png"
+  author: "JoshEvans-Weber"
+  category: "Games"
+  version: "20260125-0658"
+  tagline:
+    en_us: "Original Vintage Story dedicated server (unmodified)"
+  description:
+    en_us: |
+      Original unmodified Vintage Story dedicated server from DarkMatterProductions.
+      Use this for comparison testing with the custom build.
+      
+      🎮 Game Port: 42420/udp
+      
+      Note: This is the original unmodified container.
+  developer: "Anego Studios"
+  website: "https://www.vintagestory.at/"
+  port_map: "7681"
