@@ -13,11 +13,11 @@
     {
       "name": "vintagestory-custom",
       "title": {
-        "en_us": "Vintage Story (Auto-Heal)"
+        "en_us": "Vintage Story (Custom)"
       },
-      "icon": "https://raw.githubusercontent.com/JoshEvans-Weber/vintagestory-custom/main/icon.png",
+      "icon": "https://raw.githubusercontent.com/JoshEvans-Weber/casaos-store/main/Apps/vintagestory-custom/icon.png",
       "tagline": {
-        "en_us": "Hardened VS Server"
+        "en_us": "Enhanced with web console & auto-restart"
       },
       "category": "Games"
     },
