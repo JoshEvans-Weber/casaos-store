@@ -3,12 +3,14 @@ services:
   vintagestory:
     image: ghcr.io/joshevans-weber/vintagestory-custom:latest
     container_name: vs-server
-    restart: always
+    restart: unless-stopped
     ports:
       - "42420:42420/udp"
       - "7681:7681/tcp"
     volumes:
-      - /DATA/AppData/vintagestory/data:/vintagestory/data
+      - type: bind
+        source: /DATA/AppData/vintagestory/data
+        target: /vintagestory/data
     environment:
       - SERVICE=VintagestoryServer.dll
       - UID_NUMBER=1100
@@ -17,28 +19,32 @@ services:
       - TERMINAL_PASS=camp3rjake
     stdin_open: true
     tty: true
+    user: "0:0"  # Start as root to fix permissions, then drop to UID_NUMBER
     healthcheck:
-      test: ["CMD-SHELL", "netstat -uln | grep 42420 || exit 1"]
+      test: ["CMD-SHELL", "pgrep -f VintagestoryServer || exit 1"]
       interval: 30s
       timeout: 10s
       retries: 3
-      start_period: 60s
+      start_period: 90s
 x-casaos:
   architectures: ["amd64"]
   main: vintagestory
   title:
-    en_us: "Vintage Story (Auto-Heal)"
+    en_us: "Vintage Story Server"
   icon: "https://raw.githubusercontent.com/JoshEvans-Weber/vintagestory-custom/main/icon.png"
   author: "JoshEvans-Weber"
   category: "Games"
-  version: "20260125-0102"
+  version: "20260125-0122"
   tagline:
-    en_us: "Vintage Story server with web console access"
+    en_us: "Vintage Story dedicated server with web console"
   description:
-    en_us: "Vintage Story dedicated server with tmux and ttyd for web-based console access at port 7681. Access web terminal at http://your-ip:7681 (user: evans, pass: camp3rjake)"
+    en_us: |
+      Vintage Story dedicated server with tmux and ttyd for web-based console access.
+      
+      🎮 Game Port: 42420/udp
+      🌐 Web Console: http://your-ip:7681 (user: evans, pass: camp3rjake)
+      
+      The server will automatically create and configure the data directory on first run.
   developer: "Anego Studios"
   website: "https://www.vintagestory.at/"
-  containers:
-    - name: vintagestory
-      image: ghcr.io/joshevans-weber/vintagestory-custom:latest
-      shell: bash
+  port_map: "42420"
