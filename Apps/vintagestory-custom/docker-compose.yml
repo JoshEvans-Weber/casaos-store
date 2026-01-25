@@ -24,11 +24,11 @@ services:
     tty: true
     user: "0:0"  # Start as root to fix permissions, then drop to UID_NUMBER
     healthcheck:
-      test: ["CMD-SHELL", "pgrep -f VintagestoryServer || exit 1"]
+      test: ["CMD-SHELL", "pgrep -f VintagestoryServer > /dev/null && echo 'OK' || (pgrep -f dotnet > /dev/null && echo 'Starting' || exit 1)"]
       interval: 30s
       timeout: 10s
-      retries: 3
-      start_period: 90s
+      retries: 5
+      start_period: 120s
 x-casaos:
   architectures: ["amd64"]
   main: vintagestory
@@ -37,7 +37,7 @@ x-casaos:
   icon: "https://www.vintagestory.at/img/vintagestory-logo.png"
   author: "JoshEvans-Weber"
   category: "Games"
-  version: "20260125-0515"
+  version: "20260125-0518"
   tagline:
     en_us: "Vintage Story dedicated server with web console"
   description:
