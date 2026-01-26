@@ -6,8 +6,9 @@ services:
     restart: unless-stopped
     ports:
       - "0.0.0.0:42420:42420/udp"
+      - "0.0.0.0:42420:42420/tcp"
       - "0.0.0.0:7681:7681/tcp"
-      - "0.0.0.0:5000:5000/tcp"
+      - "0.0.0.0:8080:8080/tcp"
     volumes:
       - type: bind
         source: /DATA/AppData/vintagestory/data
@@ -16,8 +17,8 @@ services:
       - SERVICE=VintagestoryServer.dll
       - UID_NUMBER=1100
       - GID_NUMBER=1100
-      - TERMINAL_USER=evans
-      - TERMINAL_PASS=camp3rjake
+      - TERMINAL_USER=admin
+      - TERMINAL_PASS=admin
     stdin_open: true
     tty: true
     user: "0:0"
@@ -35,7 +36,7 @@ x-casaos:
   icon: "https://raw.githubusercontent.com/JoshEvans-Weber/casaos-store/main/Apps/vintagestory-custom/icon.png"
   author: "JoshEvans-Weber"
   category: "Games"
-  version: "20260126-0707"
+  version: "20260126-0748"
   tagline:
     en_us: "Dedicated server with web console"
   description:
