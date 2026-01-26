@@ -35,7 +35,7 @@ x-casaos:
   icon: "https://raw.githubusercontent.com/JoshEvans-Weber/casaos-store/main/Apps/vintagestory-custom/icon.png"
   author: "JoshEvans-Weber"
   category: "Games"
-  version: "20260126-0532"
+  version: "20260126-0549"
   tagline:
     en_us: "Dedicated server with web console"
   description:
