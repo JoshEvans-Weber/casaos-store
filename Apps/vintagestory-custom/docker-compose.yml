@@ -36,17 +36,18 @@ x-casaos:
   icon: "https://raw.githubusercontent.com/JoshEvans-Weber/casaos-store/main/Apps/vintagestory-custom/icon.png"
   author: "JoshEvans-Weber"
   category: "Games"
-  version: "20260126-0748"
+  version: "20260126-0824"
   tagline:
     en_us: "Dedicated server with web console"
   description:
     en_us: |
       Vintage Story dedicated server with web console access via ttyd.
       
-      🎮 Game Port: 42420/udp
-      🌐 Web Console: http://your-ip:7681
+      Game Port: 42420/udp, 42420/tcp
+      Web Console: http://your-ip:7681
+      RCON Port: 8080/tcp
       
-      Default credentials: evans / camp3rjake
+      Default credentials: admin/admin
   developer: "Anego Studios"
   website: "https://www.vintagestory.at/"
   port_map: "7681"
