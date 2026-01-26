@@ -468,17 +468,6 @@ This project stands on the shoulders of giants. Special thanks to:
 
 ---
 
-## Roadmap
-
-- [ ] Health checks and monitoring
-- [ ] Backup automation
-- [ ] Performance metrics dashboard
-- [ ] Multi-world support
-- [ ] Automated mod updates
-- [ ] Kubernetes support
-
----
-
 **Last Updated**: January 26, 2026  
 **Maintained By**: Josh Evans  
 **Latest Version**: See [Releases](https://github.com/JoshEvans-Weber/vintagecontainer/releases)
