@@ -11,6 +11,9 @@ services:
       - type: bind
         source: /DATA/AppData/vintagestory/data
         target: /vintagestory/data
+      - type: bind
+        source: /tmp/vs-command-queue
+        target: /tmp/vs-command-queue
     environment:
       - SERVICE=VintagestoryServer.dll
       - UID_NUMBER=1100
@@ -34,7 +37,7 @@ x-casaos:
   icon: "https://raw.githubusercontent.com/JoshEvans-Weber/casaos-store/main/Apps/vintagestory-custom/icon.png"
   author: "JoshEvans-Weber"
   category: "Games"
-  version: "20260126-0044"
+  version: "20260126-0208"
   tagline:
     en_us: "Dedicated server with web console"
   description:
