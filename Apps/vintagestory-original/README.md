@@ -1,6 +1,6 @@
 # Vintage Story Server - Original (Unmodified)
 
-This is the **original unmodified** DarkMatterProductions Vintage Story container for comparison testing.
+This is the **original unmodified** DarkMatterProductions (https://github.com/DarkMatterProductions/vintagestory) Vintage Story container for comparison testing.
 
 For the enhanced version with web console and auto-restart, use **VintageStory (Custom)** instead.
 
