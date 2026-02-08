@@ -11,22 +11,6 @@
   ],
   "apps": [
     {
-      "name": "vintagestory-custom",
-      "title": {
-        "en_us": "VintageStory"
-      },
-      "icon": "https://raw.githubusercontent.com/JoshEvans-Weber/casaos-store/main/Apps/vintagestory-custom/icon.png",
-      "tagline": {
-        "en_us": "Dedicated server with web console"
-      },
-      "category": "Games",
-      "version": "20260208-0427",
-      "updated": "2026-02-08T04:27:42.114536",
-      "image": {
-        "amd64": "ghcr.io/joshevans-weber/vintagestory-custom:latest"
-      }
-    },
-    {
       "name": "vintagestory-original",
       "title": {
         "en_us": "Vintage Story (Original)"
@@ -38,19 +22,35 @@
       "category": "Games"
     },
     {
+      "name": "vintagestory-custom",
+      "title": {
+        "en_us": "VintageStory"
+      },
+      "icon": "https://raw.githubusercontent.com/JoshEvans-Weber/casaos-store/main/Apps/vintagestory-custom/icon.png",
+      "tagline": {
+        "en_us": "Dedicated server with web console"
+      },
+      "category": "Games",
+      "version": "20260208-0441",
+      "updated": "2026-02-08T04:42:10.956696",
+      "image": {
+        "amd64": "ghcr.io/joshevans-weber/vintagestory-custom:latest"
+      }
+    },
+    {
       "name": "vintagestory-custom-preview",
       "title": {
         "en_us": "VintageStory (Preview)"
       },
       "icon": "https://raw.githubusercontent.com/JoshEvans-Weber/casaos-store/main/Apps/vintagestory-custom/icon.png",
       "tagline": {
-        "en_us": "Dedicated server with web console (1.22 test)"
+        "en_us": "Dedicated server with web console - 1.22 Preview"
       },
       "category": "Games",
-      "version": "20260208-0427",
-      "updated": "2026-02-08T04:27:42.114607",
+      "version": "20260208-0441",
+      "updated": "2026-02-08T04:42:10.956805",
       "image": {
-        "amd64": "ghcr.io/joshevans-weber/vintagestory-custom-preview:latest"
+        "amd64": "ghcr.io/joshevans-weber/vintagestory-custom-preview:1.22-test"
       }
     }
   ]
