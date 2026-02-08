@@ -55,16 +55,12 @@
     },
     {
       "name": "toontown-realms-server",
-      "title": {
-        "en_us": "Toontown Realms Server"
-      },
+      "title": "Toontown Realms Server",
       "icon": "https://raw.githubusercontent.com/joshevans-weber/casaos-store/main/Apps/toontown-realms-server/icon.png",
-      "tagline": {
-        "en_us": "Headless game server with Astron Message Director"
-      },
+      "tagline": "Headless game server with Astron Message Director",
       "category": "Games",
-      "version": "20260208-2148",
-      "updated": "2026-02-08T21:49:21.877483",
+      "version": "20260208-2156",
+      "updated": "2026-02-08T21:57:11.283594",
       "image": {
         "amd64": "ghcr.io/joshevans-weber/toontown-realms-server:latest"
       },
