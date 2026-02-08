@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  toontown-realms-server:
+    image: ghcr.io/joshevans-weber/toontown-realms-server:latest
+    container_name: toontown-realms-server
+    restart: unless-stopped
+    environment:
+      TZ: UTC
+      PUID: 1000
+      PGID: 1000
+    volumes:
+      - /DATA/AppData/toontown-realms/astron/databases:/app/astron/databases
+      - /DATA/AppData/toontown-realms/config:/app/config
+      - /DATA/AppData/toontown-realms/logs:/app/logs
+    ports:
+      - "7198:7198/tcp"
+      - "7199:7199/tcp"
+      - "7197:7197/tcp"
+    healthcheck:
+      test: ["CMD", "nc", "-z", "localhost", "7199"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 180s
