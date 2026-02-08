@@ -63,8 +63,8 @@
         "en_us": "Headless game server with Astron Message Director"
       },
       "category": "Games",
-      "version": "20260208-2219",
-      "updated": "2026-02-08T22:21:02.039424",
+      "version": "20260208-2226",
+      "updated": "2026-02-08T22:27:40.947387",
       "image": {
         "amd64": "ghcr.io/joshevans-weber/toontownserver:latest"
       },
