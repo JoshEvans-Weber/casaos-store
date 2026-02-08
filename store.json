@@ -56,8 +56,8 @@
       "icon_url": "https://raw.githubusercontent.com/JoshEvans-Weber/casaos-store/main/Apps/vintagestory-custom-preview/icon.png",
       "category": "Games",
       "screenshot_url": "https://raw.githubusercontent.com/JoshEvans-Weber/casaos-store/main/Apps/vintagestory-custom-preview/screenshot.png",
-      "version": "20260208-0517",
-      "updated": "2026-02-08T05:17:25.412249Z",
+      "version": "20260208-0521",
+      "updated": "2026-02-08T05:21:45.352153Z",
       "port_map": "7681",
       "image": {
         "amd64": "ghcr.io/joshevans-weber/vintagestory-custom-preview:1.22-test"
