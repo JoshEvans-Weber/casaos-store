@@ -57,8 +57,8 @@
       "screenshot_url": [
         "https://raw.githubusercontent.com/JoshEvans-Weber/casaos-store/main/Apps/vintagestory-custom-preview/screenshot.png"
       ],
-      "version": "20260208-0525",
-      "updated": "2026-02-08T05:25:43.568611Z",
+      "version": "20260208-0538",
+      "updated": "2026-02-08T05:38:35.873681Z",
       "port_map": "7681:7681",
       "container_image": {
         "image": "ghcr.io/joshevans-weber/vintagestory-custom-preview:1.22-test",
