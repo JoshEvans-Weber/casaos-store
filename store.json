@@ -47,10 +47,10 @@
         "en_us": "Dedicated server with web console - 1.22 Preview"
       },
       "category": "Games",
-      "version": "20260208-0552",
-      "updated": "2026-02-08T05:52:44.464439",
+      "version": "20260208-0627",
+      "updated": "2026-02-08T06:32:25.262200",
       "image": {
-        "amd64": "ghcr.io/joshevans-weber/vintagestory-custom-preview:1.22-test"
+        "amd64": "ghcr.io/joshevans-weber/vintagestory-custom-preview:latest"
       }
     }
   ]
