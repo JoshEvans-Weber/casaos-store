@@ -1,10 +1,14 @@
-# VintageStory Dedicated Server
+# VintageStory Dedicated Server (Preview)
 
-Vintage Story dedicated server with web console access via ttyd.
+Vintage Story 1.22 test release - dedicated server with web console access via ttyd.
+
+## ⚠️ Preview Version
+
+This is a test/preview release of Vintage Story 1.22. Use with caution in production.
 
 ## Features
 
-- Dedicated server for Vintage Story
+- Dedicated server for Vintage Story 1.22 test release
 - Web-based console access (ttyd)
 - RCON support for remote commands
 - Persistent data storage
@@ -28,4 +32,8 @@ Vintage Story dedicated server with web console access via ttyd.
 2. Configure ports and storage
 3. Access web console at http://your-ip:7681
 4. Use in-game multiplayer to connect to server IP:42420
+
+## Note
+
+This is the 1.22 preview/test version. For stable versions, use VintageStory app instead.
 
