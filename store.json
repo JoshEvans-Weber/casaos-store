@@ -63,10 +63,49 @@
         "en_us": "Headless game server with Astron Message Director"
       },
       "category": "Games",
-      "version": "20260208-2127",
-      "updated": "2026-02-08T21:28:59.073798",
+      "version": "20260208-2148",
+      "updated": "2026-02-08T21:49:21.877483",
       "image": {
         "amd64": "ghcr.io/joshevans-weber/toontown-realms-server:latest"
+      },
+      "x-casaos": {
+        "architectures": [
+          "amd64"
+        ],
+        "main": "docker",
+        "docker": {
+          "image": "ghcr.io/joshevans-weber/toontown-realms-server:latest",
+          "container_name": "toontown-realms-server",
+          "restart_policy": "unless-stopped",
+          "network_mode": "bridge",
+          "ports": [
+            "7198:7198/tcp",
+            "7199:7199/tcp",
+            "7197:7197/tcp"
+          ],
+          "volumes": [
+            {
+              "source": "/DATA/AppData/toontown-realms/astron/databases",
+              "target": "/app/astron/databases",
+              "bind": {}
+            },
+            {
+              "source": "/DATA/AppData/toontown-realms/config",
+              "target": "/app/config",
+              "bind": {}
+            },
+            {
+              "source": "/DATA/AppData/toontown-realms/logs",
+              "target": "/app/logs",
+              "bind": {}
+            }
+          ],
+          "environment": [
+            "TZ=UTC",
+            "PUID=1000",
+            "PGID=1000"
+          ]
+        }
       }
     }
   ]
