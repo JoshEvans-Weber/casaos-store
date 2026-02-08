@@ -1,8 +1,8 @@
-name: "vintagestory-custom"
+name: "vintagestory-custom-preview"
 services:
   vintagestory:
-    image: ghcr.io/joshevans-weber/vintagestory-custom:latest
-    container_name: vs-server
+    image: ghcr.io/joshevans-weber/vintagestory-custom-preview:latest
+    container_name: vs-server-preview
     restart: unless-stopped
     ports:
       - "0.0.0.0:42420:42420/udp"
@@ -11,7 +11,7 @@ services:
       - "0.0.0.0:8080:8080/tcp"
     volumes:
       - type: bind
-        source: /DATA/AppData/vintagestory-custom/data
+        source: /DATA/AppData/vintagestory-custom-preview/data
         target: /vintagestory/data
     environment:
       - SERVICE=VintagestoryServer.dll
@@ -20,7 +20,7 @@ services:
       - TERMINAL_USER=admin
       - TERMINAL_PASS=admin
       - RCON_PASSWORD=rcon
-      - VS_VERSION=stable
+      - VS_VERSION=1.22-test
     stdin_open: true
     tty: true
     user: "0:0"
@@ -34,7 +34,7 @@ x-casaos:
   architectures: ["amd64"]
   main: vintagestory
   title:
-    en_us: "VintageStory"
+    en_us: "VintageStory (Preview)"
   icon: "https://raw.githubusercontent.com/JoshEvans-Weber/casaos-store/main/Apps/vintagestory-custom/icon.png"
   author: "JoshEvans-Weber"
   category: "Games"
