@@ -20,7 +20,7 @@ services:
       - TERMINAL_USER=admin
       - TERMINAL_PASS=admin
       - RCON_PASSWORD=rcon
-      - VS_VERSION=
+      - VS_VERSION=1.22-test
     stdin_open: true
     tty: true
     user: "0:0"
@@ -35,10 +35,10 @@ x-casaos:
   main: vintagestory
   title:
     en_us: "VintageStory (Preview)"
-  icon: "https://raw.githubusercontent.com/JoshEvans-Weber/casaos-store/main/Apps/vintagestory-custom/icon.png"
+  icon: "https://raw.githubusercontent.com/JoshEvans-Weber/casaos-store/main/Apps/vintagestory-custom-preview/icon.png"
   author: "JoshEvans-Weber"
   category: "Games"
-  version: "20260208-0507"
+  version: "20260208-0512"
   tagline:
     en_us: "Dedicated server with web console"
   description:
