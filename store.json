@@ -42,16 +42,29 @@
       "title": {
         "en_us": "VintageStory (Preview)"
       },
-      "icon": "https://raw.githubusercontent.com/JoshEvans-Weber/casaos-store/main/Apps/vintagestory-custom/icon.png",
+      "icon": "https://raw.githubusercontent.com/JoshEvans-Weber/casaos-store/main/Apps/vintagestory-custom-preview/icon.png",
       "tagline": {
         "en_us": "Dedicated server with web console - 1.22 Preview"
       },
+      "description": {
+        "en_us": "Vintage Story 1.22 preview test release. Dedicated multiplayer server with web-based console access via ttyd and RCON support."
+      },
+      "author": {
+        "en_us": "JoshEvans-Weber"
+      },
+      "developer": "Anego Studios",
+      "icon_url": "https://raw.githubusercontent.com/JoshEvans-Weber/casaos-store/main/Apps/vintagestory-custom-preview/icon.png",
       "category": "Games",
-      "version": "20260208-0507",
-      "updated": "2026-02-08T05:08:08.278629",
+      "screenshot_url": "https://raw.githubusercontent.com/JoshEvans-Weber/casaos-store/main/Apps/vintagestory-custom-preview/screenshot.png",
+      "version": "20260208-0512",
+      "updated": "2026-02-08T05:13:03.501363Z",
+      "port_map": "7681",
       "image": {
         "amd64": "ghcr.io/joshevans-weber/vintagestory-custom-preview:1.22-test"
-      }
+      },
+      "scheme": "https",
+      "host": "raw.githubusercontent.com",
+      "https": true
     }
   ]
 }
