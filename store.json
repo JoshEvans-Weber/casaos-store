@@ -20,10 +20,10 @@
         "en_us": "Dedicated server with web console"
       },
       "category": "Games",
-      "version": "20260208-0422",
-      "updated": "2026-02-08T04:22:51.649851",
+      "version": "20260208-0427",
+      "updated": "2026-02-08T04:27:42.114536",
       "image": {
-        "amd64": "ghcr.io/joshevans-weber/vintagestory-custom:20260208-0422"
+        "amd64": "ghcr.io/joshevans-weber/vintagestory-custom:latest"
       }
     },
     {
@@ -36,6 +36,22 @@
         "en_us": "Original unmodified server"
       },
       "category": "Games"
+    },
+    {
+      "name": "vintagestory-custom-preview",
+      "title": {
+        "en_us": "VintageStory (Preview)"
+      },
+      "icon": "https://raw.githubusercontent.com/JoshEvans-Weber/casaos-store/main/Apps/vintagestory-custom/icon.png",
+      "tagline": {
+        "en_us": "Dedicated server with web console (1.22 test)"
+      },
+      "category": "Games",
+      "version": "20260208-0427",
+      "updated": "2026-02-08T04:27:42.114607",
+      "image": {
+        "amd64": "ghcr.io/joshevans-weber/vintagestory-custom-preview:latest"
+      }
     }
   ]
 }
