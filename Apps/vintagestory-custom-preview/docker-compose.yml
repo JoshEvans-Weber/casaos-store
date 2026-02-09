@@ -1,7 +1,7 @@
 name: "vintagestory-custom-preview"
 services:
   vintagestory:
-    image: ghcr.io/joshevans-weber/vintagestory-custom-preview:1.22-test
+    image: ghcr.io/joshevans-weber/vintagestory-custom-preview:1.22.0-pre.2
     container_name: vs-server-preview
     restart: unless-stopped
     ports:
@@ -20,7 +20,7 @@ services:
       - TERMINAL_USER=admin
       - TERMINAL_PASS=admin
       - RCON_PASSWORD=rcon
-      - VS_VERSION=1.22-test
+      - VS_VERSION=1.22-pre.2
     stdin_open: true
     tty: true
     user: "0:0"
@@ -38,7 +38,7 @@ x-casaos:
   icon: "https://raw.githubusercontent.com/JoshEvans-Weber/casaos-store/main/Apps/vintagestory-custom-preview/icon.png"
   author: "JoshEvans-Weber"
   category: "Games"
-  version: "20260208-0627"
+  version: "20260209-0416"
   tagline:
     en_us: "Dedicated server with web console"
   description:
