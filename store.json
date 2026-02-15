@@ -63,8 +63,8 @@
         "en_us": "Dedicated server with web console"
       },
       "category": "Games",
-      "version": "20260215-0719",
-      "updated": "2026-02-15T07:20:09.257229",
+      "version": "20260215-0726",
+      "updated": "2026-02-15T07:27:11.224415",
       "image": {
         "amd64": "ghcr.io/joshevans-weber/vintagestory-custom:latest"
       }
