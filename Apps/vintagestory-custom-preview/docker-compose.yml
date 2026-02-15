@@ -10,9 +10,12 @@ services:
       - "0.0.0.0:7681:7681/tcp"
       - "0.0.0.0:8080:8080/tcp"
     volumes:
+      # Game server data (worlds, logs, mod configs)
       - type: bind
         source: /DATA/AppData/vintagestory-custom-preview/data
         target: /vintagestory/data
+      # Server binaries - exposed for manual DLL updates and inspection
+      # Available on host at: /DATA/AppData/vintagestory-custom-preview/binaries/
       - type: bind
         source: /DATA/AppData/vintagestory-custom-preview/binaries
         target: /vintagestory/binaries
@@ -42,7 +45,7 @@ x-casaos:
   icon: "https://raw.githubusercontent.com/JoshEvans-Weber/casaos-store/main/Apps/vintagestory-custom-preview/icon.png"
   author: "JoshEvans-Weber"
   category: "Games"
-  version: "20260215-0613"
+  version: "20260215-0626"
   tagline:
     en_us: "Dedicated server with web console"
   description:

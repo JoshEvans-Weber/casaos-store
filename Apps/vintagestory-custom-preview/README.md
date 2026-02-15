@@ -13,6 +13,7 @@ This is a preview/test release of Vintage Story. Use with caution in production.
 - RCON support for remote commands
 - Persistent data storage
 - Port mapping for multiplayer
+- Manual DLL inspection and updates
 
 ## Ports
 
@@ -33,16 +34,38 @@ This is a preview/test release of Vintage Story. Use with caution in production.
 3. Access web console at http://your-ip:7681
 4. Use in-game multiplayer to connect to server IP:42420
 
+## File Access
+
+All server files are stored in `/DATA/AppData/vintagestory-custom-preview/`:
+
+### Server Data
+- **Path**: `/DATA/AppData/vintagestory-custom-preview/data/`
+- Contains: worlds, logs, mod configurations, save data
+- Accessible via file manager
+
+### Server Binaries
+- **Path**: `/DATA/AppData/vintagestory-custom-preview/binaries/`
+- Contains: VintagestoryServer.dll and all runtime dependencies (preview version)
+- Accessible via file manager for inspection and manual updates
+- **On image update**: Auto-refreshed with latest preview binaries
+
 ## Manual DLL Updates
 
-To manually update the server DLLs:
+To update specific preview server DLLs:
 
-1. Locate the binaries folder at: `/DATA/AppData/vintagestory-custom-preview/binaries/`
-2. Place your updated `.dll` files in this directory
-3. Restart the container
-4. The server will automatically use the updated DLLs on the next start
+1. Stop the container via CasaOS
+2. Navigate to `/DATA/AppData/vintagestory-custom-preview/binaries/` in file manager
+3. Replace or update specific `.dll` files as needed
+4. Restart the container
+5. New DLLs will be used immediately on next startup
 
-**Note:** Ensure all required DLL files are present. Missing DLLs will be automatically copied from the container's default installation.
+**Note**: If files are deleted, they'll be auto-restored from image defaults on container restart.
+
+## Troubleshooting
+
+- **Check logs**: `/DATA/AppData/vintagestory-custom-preview/data/Logs/server-main.log`
+- **Verify binaries**: `/DATA/AppData/vintagestory-custom-preview/binaries/VintagestoryServer.dll` should exist and be non-zero size
+- **Reset to defaults**: Delete all files in `binaries/` folder, restart container
 
 ## Note
 
