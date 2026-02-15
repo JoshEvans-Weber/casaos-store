@@ -33,6 +33,17 @@ This is a preview/test release of Vintage Story. Use with caution in production.
 3. Access web console at http://your-ip:7681
 4. Use in-game multiplayer to connect to server IP:42420
 
+## Manual DLL Updates
+
+To manually update the server DLLs:
+
+1. Locate the binaries folder at: `/DATA/AppData/vintagestory-custom-preview/binaries/`
+2. Place your updated `.dll` files in this directory
+3. Restart the container
+4. The server will automatically use the updated DLLs on the next start
+
+**Note:** Ensure all required DLL files are present. Missing DLLs will be automatically copied from the container's default installation.
+
 ## Note
 
 This is the 1.22.0-pre.2 preview/test version. For stable versions, use VintageStory app instead.

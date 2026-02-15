@@ -13,6 +13,10 @@ services:
       - type: bind
         source: /DATA/AppData/vintagestory-custom-preview/data
         target: /vintagestory/data
+      - type: bind
+        source: /DATA/AppData/vintagestory-custom-preview/binaries
+        target: /vintagestory/binaries
+        read_only: false
     environment:
       - SERVICE=VintagestoryServer.dll
       - UID_NUMBER=1100
@@ -38,7 +42,7 @@ x-casaos:
   icon: "https://raw.githubusercontent.com/JoshEvans-Weber/casaos-store/main/Apps/vintagestory-custom-preview/icon.png"
   author: "JoshEvans-Weber"
   category: "Games"
-  version: "20260209-0416"
+  version: "20260215-0613"
   tagline:
     en_us: "Dedicated server with web console"
   description:
@@ -50,6 +54,8 @@ x-casaos:
       RCON Port: 8080/tcp
       
       Default credentials: admin/admin
+      
+      ✓ Manual DLL Updates: Place updated DLL files in /DATA/AppData/*/binaries/ to upgrade the server version
   developer: "Anego Studios"
   website: "https://www.vintagestory.at/"
   port_map: "7681"
