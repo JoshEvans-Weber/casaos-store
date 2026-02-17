@@ -12,12 +12,29 @@ A lightweight web server that fetches and caches JSON data from multiple URLs wi
 
 ## Configuration
 
-Configure your servers in the `servers.json` file:
+Configure your servers in the `servers.json` file.
+
+### In CasaOS
+
+1. Open CasaOS terminal/file manager
+2. Navigate to `/DATA/AppData/vs-serverquery/`
+3. Edit `servers.json` with your desired server URLs
+4. Restart the VS Server Query container for changes to take effect
+
+### Format
 
 ```json
 [
   "http://example.com/api",
   "http://another-server.com/data"
+]
+```
+
+Default servers if not configured:
+```json
+[
+  "http://vintagetest.minecraftharbor.net:8181/",
+  "http://vintage.minecraftharbor.net:8182/"
 ]
 ```
 

@@ -75,8 +75,22 @@ def handle_api_all():
     """Handle /api.php?action=all request"""
     os.makedirs(CACHE_DIR, exist_ok=True)
     
+    servers_file = os.path.join(os.path.dirname(__file__), "servers.json")
+    
+    # Create default servers.json if it doesn't exist
+    if not os.path.exists(servers_file):
+        default_servers = [
+            "http://vintagetest.minecraftharbor.net:8181/",
+            "http://vintage.minecraftharbor.net:8182/"
+        ]
+        try:
+            with open(servers_file, 'w') as f:
+                json.dump(default_servers, f, indent=2)
+        except:
+            pass
+    
     try:
-        with open(os.path.join(os.path.dirname(__file__), "servers.json"), 'r') as f:
+        with open(servers_file, 'r') as f:
             servers = json.load(f)
     except:
         return []
