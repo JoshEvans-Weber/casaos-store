@@ -5,39 +5,17 @@ services:
     image: ghcr.io/joshevans-weber/vs-serverquery:1.0.0
     container_name: vs-serverquery
     restart: unless-stopped
-    network_mode: bridge
-    
     ports:
-      - target: 8000
-        published: "8000"
-        protocol: tcp
-    
+      - "0.0.0.0:8000:8000/tcp"
     volumes:
       - type: bind
-        source: /DATA/AppData/$AppID/cache
+        source: /DATA/AppData/vs-serverquery/cache
         target: /app/cache
-        mode: rw
       - type: bind
-        source: /DATA/AppData/$AppID/servers.json
+        source: /DATA/AppData/vs-serverquery/servers.json
         target: /app/servers.json
-        mode: rw
-    
     environment:
-      PYTHONUNBUFFERED: "1"
-    
-    x-casaos:
-      ports:
-        - container: "8000"
-          description:
-            en_us: Web Server Port
-      
-      volumes:
-        - container: /app/cache
-          description:
-            en_us: Cache directory for server responses
-        - container: /app/servers.json
-          description:
-            en_us: Server list configuration file
+      - PYTHONUNBUFFERED=1
 
 x-casaos:
   architectures: ["amd64", "arm64"]
@@ -64,23 +42,18 @@ x-casaos:
     zh_cn: |
       # VS 服务器查询
       
-      一个轻量级网络服务器，可以从多个URL获取和缓存JSON数据。
-  
+  title:
+    en_us: "VS Server Query"
+    zh_cn: "VS 服务器查询"
+  icon: "https://raw.githubusercontent.com/JoshEvans-Weber/casaos-store/main/Apps/vs-serverquery/icon.png"
+  author: "Josh Evans"
+  category: "Utilities"
+  version: "1.0.0"
   tagline:
-    en_us: Multi-server JSON query and caching service
-    zh_cn: 多服务器JSON查询和缓存服务
-  
-  developer: Josh Evans
-  icon: https://raw.githubusercontent.com/JoshEvans-Weber/casaos-store/main/Apps/vs-serverquery/icon.png
-  
-  screenshot_link:
-    - https://raw.githubusercontent.com/JoshEvans-Weber/casaos-store/main/Apps/vs-serverquery/screenshot-1.png
-  
-  index: /
+    en_us: "Multi-server JSON query and caching service"
+    zh_cn: "多服务器JSON查询和缓存服务"
+  description:
+    en_us: "A lightweight web server that fetches and caches JSON data from multiple URLs with a clean web interface."
+    zh_cn: "一个轻量级网络服务器，可以从多个URL获取和缓存JSON数据。"
+  developer: "Josh Evans"
   port_map: "8000"
-  
-  tips:
-    before_install:
-      en_us: |
-        Configure your server list in the `servers.json` file after installation.
-        Default cache TTL is 10 seconds
