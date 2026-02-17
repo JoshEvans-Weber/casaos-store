@@ -83,10 +83,14 @@
         "en_us": "Multi-server JSON query and caching service"
       },
       "category": "Utilities",
+      "description": {
+        "en_us": "A lightweight web server that fetches and caches JSON data from multiple URLs with a clean web interface"
+      },
       "version": "1.0.0",
       "updated": "2026-02-17T05:10:00",
       "image": {
-        "amd64": "ghcr.io/joshevans-weber/vs-serverquery:latest"
+        "amd64": "ghcr.io/joshevans-weber/vs-serverquery:latest",
+        "arm64": "ghcr.io/joshevans-weber/vs-serverquery:latest"
       }
     }
   ]
