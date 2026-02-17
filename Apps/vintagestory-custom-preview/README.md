@@ -1,6 +1,6 @@
 # VintageStory Dedicated Server (Preview)
 
-Vintage Story 1.22.0-pre.1 preview release - dedicated server with web console access via ttyd.
+Vintage Story 1.22.0-pre.2 preview release - dedicated server with web console access via ttyd.
 
 ## ⚠️ Preview Version
 
@@ -8,7 +8,7 @@ This is a preview/test release of Vintage Story. Use with caution in production.
 
 ## Features
 
-- Dedicated server for Vintage Story 1.22.0-pre.1 preview release
+- Dedicated server for Vintage Story 1.22.0-pre.2 preview release
 - Web-based console access (ttyd)
 - RCON support for remote commands
 - Persistent data storage
@@ -69,5 +69,5 @@ To update specific preview server DLLs:
 
 ## Note
 
-This is the 1.22.0-pre.1 preview/test version. For stable versions, use VintageStory app instead.
+This is the 1.22.0-pre.2 preview/test version. For stable versions, use VintageStory app instead.
 
