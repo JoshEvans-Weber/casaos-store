@@ -29,31 +29,28 @@ services:
       ports:
         - container: "8000"
           description:
-            en_US: Web Server Port
+            en_us: Web Server Port
       
       volumes:
         - container: /app/cache
           description:
-            en_US: Cache directory for server responses
+            en_us: Cache directory for server responses
         - container: /app/servers.json
           description:
-            en_US: Server list configuration file
+            en_us: Server list configuration file
 
 x-casaos:
-  architectures:
-    - amd64
-    - arm64
-  
+  architectures: ["amd64", "arm64"]
   main: vs-serverquery
   author: Josh Evans
   category: Utilities
   
   title:
-    en_US: VS Server Query
-    zh_CN: VS 服务器查询
+    en_us: VS Server Query
+    zh_cn: VS 服务器查询
   
   description:
-    en_US: |
+    en_us: |
       # VS Server Query
       
       A lightweight web server that fetches and caches JSON data from multiple URLs with a clean web interface.
@@ -64,14 +61,14 @@ x-casaos:
       - Clean, responsive web UI
       - Supports custom server lists
     
-    zh_CN: |
+    zh_cn: |
       # VS 服务器查询
       
       一个轻量级网络服务器，可以从多个URL获取和缓存JSON数据。
   
   tagline:
-    en_US: Multi-server JSON query and caching service
-    zh_CN: 多服务器JSON查询和缓存服务
+    en_us: Multi-server JSON query and caching service
+    zh_cn: 多服务器JSON查询和缓存服务
   
   developer: Josh Evans
   icon: https://raw.githubusercontent.com/JoshEvans-Weber/casaos-store/main/Apps/vs-serverquery/icon.png
@@ -84,6 +81,6 @@ x-casaos:
   
   tips:
     before_install:
-      en_US: |
+      en_us: |
         Configure your server list in the `servers.json` file after installation.
         Default cache TTL is 10 seconds

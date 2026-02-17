@@ -76,15 +76,15 @@
     {
       "name": "vs-serverquery",
       "title": {
-        "en_US": "VS Server Query"
+        "en_us": "VS Server Query"
       },
       "icon": "https://raw.githubusercontent.com/JoshEvans-Weber/casaos-store/main/Apps/vs-serverquery/icon.png",
       "tagline": {
-        "en_US": "Multi-server JSON query and caching service"
+        "en_us": "Multi-server JSON query and caching service"
       },
       "category": "Utilities",
       "description": {
-        "en_US": "A lightweight web server that fetches and caches JSON data from multiple URLs with a clean web interface"
+        "en_us": "A lightweight web server that fetches and caches JSON data from multiple URLs with a clean web interface"
       },
       "version": "1.0.0",
       "updated": "2026-02-17T05:10:00",
