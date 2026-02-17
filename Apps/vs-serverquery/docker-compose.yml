@@ -9,8 +9,8 @@ services:
       - "0.0.0.0:8000:8000/tcp"
     volumes:
       - type: bind
-        source: /DATA/AppData/vs-serverquery
-        target: /app
+        source: /DATA/AppData/vs-serverquery/cache
+        target: /app/cache
     environment:
       - PYTHONUNBUFFERED=1
 
