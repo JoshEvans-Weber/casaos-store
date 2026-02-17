@@ -1,1 +1,4 @@
-[{"name": "Game", "font": "gamepad"}, {"name": "Utilities", "font": "wrench"}]
+[
+  {"name": "Games", "font": "gamepad"},
+  {"name": "Utilities", "font": "wrench"}
+]
