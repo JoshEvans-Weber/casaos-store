@@ -68,6 +68,22 @@
       "image": {
         "amd64": "ghcr.io/joshevans-weber/vintagestory-custom:latest"
       }
+    },
+    {
+      "name": "vs-serverquery",
+      "title": {
+        "en_us": "VS Server Query"
+      },
+      "icon": "https://raw.githubusercontent.com/JoshEvans-Weber/casaos-store/main/Apps/vs-serverquery/icon.svg",
+      "tagline": {
+        "en_us": "Multi-server JSON query and caching service"
+      },
+      "category": "Utilities",
+      "version": "1.0.0",
+      "updated": "2026-02-17T05:10:00",
+      "image": {
+        "amd64": "ghcr.io/joshevans-weber/vs-serverquery:latest"
+      }
     }
   ]
 }
