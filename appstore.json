@@ -1,0 +1,93 @@
+{
+  "name": "JoshEvans-Weber's Personal Store",
+  "category_list": [
+    {
+      "name": "Games",
+      "font": "gamepad"
+    },
+    {
+      "name": "Utilities",
+      "font": "wrench"
+    }
+  ],
+  "recommend": [
+    "vintagestory-custom"
+  ],
+  "apps": [
+    {
+      "name": "vintagestory-original",
+      "title": {
+        "en_us": "Vintage Story (Original)"
+      },
+      "icon": "https://raw.githubusercontent.com/JoshEvans-Weber/casaos-store/main/Apps/vintagestory-original/icon.png",
+      "tagline": {
+        "en_us": "Original unmodified server"
+      },
+      "category": "Games"
+    },
+    {
+      "name": "vintagestory-custom-preview",
+      "title": {
+        "en_us": "VintageStory (Preview)"
+      },
+      "icon": "https://raw.githubusercontent.com/JoshEvans-Weber/casaos-store/main/Apps/vintagestory-custom-preview/icon.png",
+      "tagline": {
+        "en_us": "Dedicated server with web console - 1.22 Preview"
+      },
+      "category": "Games",
+      "version": "20260208-0627",
+      "updated": "2026-02-08T06:32:25.262200",
+      "image": {
+        "amd64": "ghcr.io/joshevans-weber/vintagestory-custom-preview:latest"
+      }
+    },
+    {
+      "name": "toontown-realms-server",
+      "title": {
+        "en_us": "Toontown Realms Server"
+      },
+      "icon": "https://raw.githubusercontent.com/joshevans-weber/casaos-store/main/Apps/toontown-realms-server/icon.png",
+      "tagline": {
+        "en_us": "Headless game server with Astron Message Director"
+      },
+      "category": "Games",
+      "version": "20260208-2235",
+      "updated": "2026-02-08T22:35:47",
+      "image": {
+        "amd64": "ghcr.io/joshevans-weber/toontownserver:latest"
+      }
+    },
+    {
+      "name": "vintagestory-custom",
+      "title": {
+        "en_us": "VintageStory"
+      },
+      "icon": "https://raw.githubusercontent.com/JoshEvans-Weber/casaos-store/main/Apps/vintagestory-custom/icon.png",
+      "tagline": {
+        "en_us": "Dedicated server with web console"
+      },
+      "category": "Games",
+      "version": "20260215-0757",
+      "updated": "2026-02-15T07:58:13.777469",
+      "image": {
+        "amd64": "ghcr.io/joshevans-weber/vintagestory-custom:latest"
+      }
+    },
+    {
+      "name": "vs-serverquery",
+      "title": {
+        "en_us": "VS Server Query"
+      },
+      "icon": "https://raw.githubusercontent.com/JoshEvans-Weber/casaos-store/main/Apps/vs-serverquery/icon.svg",
+      "tagline": {
+        "en_us": "Multi-server JSON query and caching service"
+      },
+      "category": "Utilities",
+      "version": "1.0.0",
+      "updated": "2026-02-17T05:10:00",
+      "image": {
+        "amd64": "ghcr.io/joshevans-weber/vs-serverquery:latest"
+      }
+    }
+  ]
+}
