@@ -20,28 +20,6 @@ services:
 x-casaos:
   architectures: ["amd64", "arm64"]
   main: vs-serverquery
-  author: Josh Evans
-  category: Utilities
-  
-  title:
-    en_us: VS Server Query
-    zh_cn: VS 服务器查询
-  
-  description:
-    en_us: |
-      # VS Server Query
-      
-      A lightweight web server that fetches and caches JSON data from multiple URLs with a clean web interface.
-      
-      **Features:**
-      - Multi-server JSON querying
-      - Configurable caching (10-second TTL)
-      - Clean, responsive web UI
-      - Supports custom server lists
-    
-    zh_cn: |
-      # VS 服务器查询
-      
   title:
     en_us: "VS Server Query"
     zh_cn: "VS 服务器查询"
