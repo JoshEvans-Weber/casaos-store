@@ -1,14 +1,89 @@
-version: '3.8'
+name: vs-serverquery
 
 services:
   vs-serverquery:
-    image: ghcr.io/joshevans-weber/vs-serverquery:latest
+    image: ghcr.io/joshevans-weber/vs-serverquery:1.0.0
     container_name: vs-serverquery
     restart: unless-stopped
+    network_mode: bridge
+    
     ports:
-      - "8000:8000"
+      - target: 8000
+        published: "8000"
+        protocol: tcp
+    
     volumes:
-      - /DATA/AppData/vs-serverquery/cache:/app/cache
-      - /DATA/AppData/vs-serverquery/servers.json:/app/servers.json
+      - type: bind
+        source: /DATA/AppData/$AppID/cache
+        target: /app/cache
+        mode: rw
+      - type: bind
+        source: /DATA/AppData/$AppID/servers.json
+        target: /app/servers.json
+        mode: rw
+    
     environment:
-      - PYTHONUNBUFFERED=1
+      PYTHONUNBUFFERED: "1"
+    
+    x-casaos:
+      ports:
+        - container: "8000"
+          description:
+            en_US: Web Server Port
+      
+      volumes:
+        - container: /app/cache
+          description:
+            en_US: Cache directory for server responses
+        - container: /app/servers.json
+          description:
+            en_US: Server list configuration file
+
+x-casaos:
+  architectures:
+    - amd64
+    - arm64
+  
+  main: vs-serverquery
+  author: Josh Evans
+  category: Utilities
+  
+  title:
+    en_US: VS Server Query
+    zh_CN: VS 服务器查询
+  
+  description:
+    en_US: |
+      # VS Server Query
+      
+      A lightweight web server that fetches and caches JSON data from multiple URLs with a clean web interface.
+      
+      **Features:**
+      - Multi-server JSON querying
+      - Configurable caching (10-second TTL)
+      - Clean, responsive web UI
+      - Supports custom server lists
+    
+    zh_CN: |
+      # VS 服务器查询
+      
+      一个轻量级网络服务器，可以从多个URL获取和缓存JSON数据。
+  
+  tagline:
+    en_US: Multi-server JSON query and caching service
+    zh_CN: 多服务器JSON查询和缓存服务
+  
+  developer: Josh Evans
+  icon: https://raw.githubusercontent.com/JoshEvans-Weber/casaos-store/main/Apps/vs-serverquery/icon.png
+  
+  screenshot_link:
+    - https://raw.githubusercontent.com/JoshEvans-Weber/casaos-store/main/Apps/vs-serverquery/screenshot-1.png
+  
+  index: /
+  port_map: "8000"
+  
+  tips:
+    before_install:
+      en_US: |
+        Configure your server list in the `servers.json` file after installation.
+        Default cache TTL is 10 seconds
