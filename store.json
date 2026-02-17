@@ -78,7 +78,7 @@
       "title": {
         "en_us": "VS Server Query"
       },
-      "icon": "https://raw.githubusercontent.com/JoshEvans-Weber/casaos-store/main/Apps/vs-serverquery/icon.svg",
+      "icon": "https://raw.githubusercontent.com/JoshEvans-Weber/casaos-store/main/Apps/vs-serverquery/icon.png",
       "tagline": {
         "en_us": "Multi-server JSON query and caching service"
       },

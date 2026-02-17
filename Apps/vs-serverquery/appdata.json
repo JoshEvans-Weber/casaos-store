@@ -3,7 +3,7 @@
   "name": "VS Server Query",
   "description": "A lightweight web server that fetches and caches JSON data from multiple URLs with a clean web interface",
   "version": "1.0.0",
-  "icon": "https://raw.githubusercontent.com/JoshEvans-Weber/casaos-store/main/Apps/vs-serverquery/icon.svg",
+  "icon": "https://raw.githubusercontent.com/JoshEvans-Weber/casaos-store/main/Apps/vs-serverquery/icon.png",
   "tagline": "Multi-server JSON query and caching service",
   "category": "Utilities",
   "tags": ["web-server", "api", "caching", "json", "python"],
@@ -51,7 +51,9 @@
     "protocol": "http"
   },
   
-  "screenshot": [],
+  "screenshot": [
+    "https://raw.githubusercontent.com/JoshEvans-Weber/casaos-store/main/Apps/vs-serverquery/icon.png"
+  ],
   
   "maintainers": [
     {
