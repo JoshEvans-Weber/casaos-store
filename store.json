@@ -4,6 +4,10 @@
     {
       "name": "Games",
       "font": "gamepad"
+    },
+    {
+      "name": "Utilities",
+      "font": "wrench"
     }
   ],
   "recommend": [
