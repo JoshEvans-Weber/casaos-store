@@ -58,22 +58,6 @@
       }
     },
     {
-      "name": "vintagestory-custom",
-      "title": {
-        "en_us": "VintageStory"
-      },
-      "icon": "https://raw.githubusercontent.com/JoshEvans-Weber/casaos-store/main/Apps/vintagestory-custom/icon.png",
-      "tagline": {
-        "en_us": "Dedicated server with web console"
-      },
-      "category": "Games",
-      "version": "20260215-0757",
-      "updated": "2026-02-15T07:58:13.777469",
-      "image": {
-        "amd64": "ghcr.io/joshevans-weber/vintagestory-custom:latest"
-      }
-    },
-    {
       "name": "vs-serverquery",
       "title": {
         "en_us": "VS Server Query"
@@ -91,6 +75,22 @@
       "image": {
         "amd64": "ghcr.io/joshevans-weber/vs-serverquery:1.0.3",
         "arm64": "ghcr.io/joshevans-weber/vs-serverquery:1.0.3"
+      }
+    },
+    {
+      "name": "vintagestory-custom",
+      "title": {
+        "en_us": "VintageStory"
+      },
+      "icon": "https://raw.githubusercontent.com/JoshEvans-Weber/casaos-store/main/Apps/vintagestory-custom/icon.png",
+      "tagline": {
+        "en_us": "Dedicated server with web console"
+      },
+      "category": "Games",
+      "version": "20260217-0044",
+      "updated": "2026-02-17T07:46:07.830379",
+      "image": {
+        "amd64": "ghcr.io/joshevans-weber/vintagestory-custom:latest"
       }
     }
   ]
