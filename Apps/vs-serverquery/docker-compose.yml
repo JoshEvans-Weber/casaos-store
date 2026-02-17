@@ -9,8 +9,8 @@ services:
       - "0.0.0.0:8000:8000/tcp"
     volumes:
       - type: bind
-        source: /DATA/AppData/vs-serverquery
-        target: /app
+        source: /DATA/AppData/vs-serverquery/cache
+        target: /app/cache
     environment:
       - PYTHONUNBUFFERED=1
 
@@ -23,7 +23,7 @@ x-casaos:
   icon: "https://raw.githubusercontent.com/JoshEvans-Weber/casaos-store/main/Apps/vs-serverquery/icon.png"
   author: "Josh Evans"
   category: "Utilities"
-  version: "1.0.1"
+  version: "1.0.2"
   tagline:
     en_us: "Multi-server JSON query and caching service"
     zh_cn: "多服务器JSON查询和缓存服务"
