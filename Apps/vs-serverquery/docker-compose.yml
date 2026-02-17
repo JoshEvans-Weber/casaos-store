@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  vs-serverquery:
+    image: ghcr.io/joshevans-weber/vs-serverquery:latest
+    container_name: vs-serverquery
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    volumes:
+      - /DATA/AppData/vs-serverquery/cache:/app/cache
+      - /DATA/AppData/vs-serverquery/servers.json:/app/servers.json
+    environment:
+      - PYTHONUNBUFFERED=1
+    networks:
+      - casaos
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 5s
+
+networks:
+  casaos:
+    external: true
