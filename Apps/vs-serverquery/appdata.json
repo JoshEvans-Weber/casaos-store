@@ -1,0 +1,65 @@
+{
+  "id": "vs-serverquery",
+  "name": "VS Server Query",
+  "description": "A lightweight web server that fetches and caches JSON data from multiple URLs with a clean web interface",
+  "version": "1.0.0",
+  "icon": "https://raw.githubusercontent.com/JoshEvans-Weber/casaos-store/main/Apps/vs-serverquery/icon.png",
+  "tagline": "Multi-server JSON query and caching service",
+  "category": "Utilities",
+  "tags": ["web-server", "api", "caching", "json", "python"],
+  
+  "container": {
+    "image": "ghcr.io/joshevans-weber/vs-serverquery:latest",
+    "restart_policy": "unless-stopped",
+    "network_mode": "bridge",
+    "hostname": "query-server",
+    
+    "ports": [
+      {
+        "container": 8000,
+        "host": 8000,
+        "protocol": "tcp",
+        "description": "Web Server"
+      }
+    ],
+    
+    "volumes": [
+      {
+        "container": "/app/cache",
+        "host": "/DATA/AppData/query-server/cache",
+        "mode": "rw"
+      },
+      {
+        "container": "/app/servers.json",
+        "host": "/DATA/AppData/query-server/servers.json",
+        "mode": "rw"
+      }
+    ],
+    
+    "environment": [
+      {
+        "key": "PYTHONUNBUFFERED",
+        "value": "1",
+        "description": "Enable Python stdout buffering"
+      }
+    ]
+  },
+  
+  "web_ui": {
+    "port": 8000,
+    "path": "/",
+    "protocol": "http"
+  },
+  
+  "screenshot": [
+    "https://raw.githubusercontent.com/JoshEvans-Weber/casaos-store/main/Apps/vs-serverquery/icon.png"
+  ],
+  
+  "maintainers": [
+    {
+      "name": "Your Name",
+      "email": "your-email@example.com",
+      "url": "https://github.com/yourusername"
+    }
+  ]
+}
