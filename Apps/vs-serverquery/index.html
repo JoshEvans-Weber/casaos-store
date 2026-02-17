@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>VS Server Query</title>
+  <meta name="description" content="">
+  <link rel="stylesheet" href="style.css?v=14">
+</head>
+<body>
+  <div class="container">
+    <h2>Server List</h2>
+    <div id="serverCount" class="server-count">Servers: 0 / 0</div>
+    <div id="players"></div>
+  </div>
+
+ 
+ 
+  <script>
+    const lastServerStates = {};
+
+    // zero-pad helper for date parts
+    function pad2(n) { return String(n ?? 0).padStart(2, '0'); }
+
+    function getTemperatureColor(temp) {
+      if (typeof temp !== 'number' || !isFinite(temp)) return "#ffffff";
+      if (temp <= 0) return "#cceeff";
+      if (temp >= 30) return "#ffcccc";
+      return "#ffffff";
+    }
+
+    function formatWindChip(w){
+  const p = (w && typeof w.Percent === 'number' && isFinite(w.Percent)) ? Math.round(w.Percent) : null;
+  if (p === null) return '<span class="muted">N/A</span>';
+  return `<span class="wind-chip"><span class="wind-icon">🌬️</span>${p}%</span>`;
+}
+
+async function fetchServerData() {
+      const container = document.getElementById("players");
+      try {
+        const response = await fetch("api.php?action=all");
+        const results = await response.json();
+        let visibleCount = 0;
+
+        results.forEach((server, i) => {
+          const blockId = `server-block-${i}`;
+          let block = document.getElementById(blockId) || document.createElement("div");
+
+          if (!block.id) {
+            block.className = "info";
+            block.id = blockId;
+            container.appendChild(block);
+          }
+
+          const shown = renderSingleServer(server, block, i);
+          block.style.display = shown ? "block" : "none";
+          if (shown) visibleCount++;
+        });
+
+        updateServerCount(visibleCount, results.length);
+      } catch (err) {
+        const msg = document.createElement('div');
+        msg.className = 'error-box';
+        msg.textContent = 'Error while loading server list.';
+        container.innerHTML = '';
+        container.appendChild(msg);
+        updateServerCount(0, 0);
+      }
+    }
+
+    function renderSingleServer(server, block, index) {
+      const key = server.url;
+      const newState = JSON.stringify(server);
+      if (lastServerStates[key] === newState) return block.style.display !== "none";
+      lastServerStates[key] = newState;
+      block.innerHTML = "";
+
+      if (server.error || !server.data?.success) {
+        block.innerHTML = `<h3>#${index + 1}: ${server.url}</h3><div class="error-box">${server.error || server.data?.error}</div>`;
+        return true;
+      }
+
+      const data = server.data.data;
+      const spawnPoint = data.spawnPoint || { X: 0, Y: 0, Z: 0 };
+
+      // --- Dátum: monthName használata (fallback a numerikus hónapra)
+      const y = data.date?.year;
+      const m = data.date?.month;
+      const mn = data.date?.monthName; // ÚJ
+      const d = data.date?.day;
+      const h = data.date?.hour;
+      const min = data.date?.minute;
+      const dateStr = (y != null && d != null && h != null && min != null)
+        ? `${y}. ${mn ?? pad2(m)}. ${pad2(d)}. ${pad2(h)}:${pad2(min)}`
+        : "N/A";
+
+      // temperature color & value safety (spawn/weather)
+      const tNum = Number(data.weather?.Temperature);
+      const tempColor = isFinite(tNum) ? getTemperatureColor(tNum) : "#ffffff";
+      const spawnTemp = isFinite(tNum) ? tNum.toFixed(1) : "N/A";
+      const rainfallIcon = Number(data.weather?.Rainfall ?? 0) > 0 ? " 🌧️" : "";
+      const spawnWindHtml = formatWindChip(data.weather?.Wind);
+
+      const welcomeMessage = (data.welcomeMessage
+        ? String(data.welcomeMessage).replace("{0}", "Player")
+        : "No welcome message");
+
+      const cleanUrl = (server.url || "")
+        .replace(/^https?:\/\//, '')
+        .replace(/:\d+.*$/, '');
+
+      // Title
+      const title = document.createElement("h3");
+      title.textContent = `🖥️ #${index + 1}: ${data.serverName || "Unnamed Server"}`;
+      block.appendChild(title);
+
+      // Info block
+      const info = document.createElement("div");
+      const maxClients = data.maxClients ?? "?";
+      const playersCount = Array.isArray(data.players) ? data.players.length : 0;
+      const animals = Array.isArray(data.animals) ? data.animals : [];
+      const animalsCount = animals.length;
+
+      info.innerHTML = `
+        <strong>🌐 IP / URL:</strong> <span class="server-ip">${cleanUrl}</span><br>
+        <strong>💬 Welcome message:</strong> ${welcomeMessage}<br>
+        <strong>👥 Max players:</strong> ${maxClients}<br>
+        <strong>📅 Date:</strong> ${dateStr}<br>
+        <strong>🌡️ Spawn temperature:</strong>
+        <span class="temp-label" style="color: ${tempColor};">${spawnTemp} °C</span>${rainfallIcon}<br>
+        ${spawnWindHtml}<br>
+        <strong>🧍 Players:</strong> ${playersCount} / ${maxClients}<br>
+        <strong>🐾 Animals:</strong> ${animalsCount}
+      `;
+      block.appendChild(info);
+
+      // --- Mods (collapsible)
+      const mods = Array.isArray(data.mods) ? data.mods : [];
+      if (mods.length > 0) {
+        block.appendChild(document.createElement("hr"));
+
+        const modsSection = document.createElement("details");
+        const summary = document.createElement("summary");
+        summary.textContent = `📦 Installed mods (${mods.length})`;
+        modsSection.appendChild(summary);
+
+        const modsList = document.createElement("ul");
+        modsList.className = "mods-list";
+
+        mods.forEach(mod => {
+          const li = document.createElement("li");
+          li.innerHTML = `
+            <strong>${mod.Name}</strong> <small>(v${mod.Version})</small><br>
+            👤 ${Array.isArray(mod.Authors) ? mod.Authors.join(", ") : (mod.Authors ?? "")}<br>
+            <em>${mod.Description || "No description"}</em>
+          `;
+          modsList.appendChild(li);
+        });
+
+        modsSection.appendChild(modsList);
+        block.appendChild(modsSection);
+      }
+
+      // --- Players
+      if (playersCount > 0) {
+        const playerList = document.createElement("ul");
+        data.players.forEach(player => playerList.appendChild(renderPlayer(player, spawnPoint)));
+        block.appendChild(document.createElement("hr"));
+        const playersLabel = document.createElement("div");
+        playersLabel.textContent = "Online players:";
+        block.appendChild(playersLabel);
+        block.appendChild(playerList);
+      }
+
+      // --- Animals (környezeti T + eső ikon)
+      if (animalsCount > 0) {
+        block.appendChild(document.createElement("hr"));
+        const animalsLabel = document.createElement("div");
+        animalsLabel.textContent = "Animals:";
+        block.appendChild(animalsLabel);
+
+        const animalList = document.createElement("ul");
+        animals.forEach(animal => animalList.appendChild(renderAnimal(animal, spawnPoint)));
+        block.appendChild(animalList);
+      }
+
+      return true;
+    }
+
+    function renderPlayer(player, spawnPoint) {
+      const li = document.createElement("li");
+
+      const entitlements = Array.isArray(player.Entitlements) && player.Entitlements.length > 0
+        ? ` [${player.Entitlements.join(", ")}]` : "";
+      const nameEl = document.createElement('div');
+      nameEl.innerHTML = `🧍 <strong>${player.Name}${entitlements}</strong>`;
+      li.appendChild(nameEl);
+
+      // Relative coordinates
+      const coordsEl = document.createElement('div');
+      coordsEl.className = 'coords';
+      const spawnX = spawnPoint?.X ?? 0;
+      const spawnZ = spawnPoint?.Z ?? 0;
+      const pX = (player.Coordinates?.X ?? 0) - spawnX;
+      const pY = (player.Coordinates?.Y ?? 0);
+      const pZ = (player.Coordinates?.Z ?? 0) - spawnZ;
+      coordsEl.textContent = `(X: ${pX}, Y: ${pY}, Z: ${pZ})`;
+      li.appendChild(coordsEl);
+
+      // Health bar
+      const hC = Number(player.Health?.Current ?? 0);
+      const hM = Number(player.Health?.Max ?? 1);
+      const hPct = hM > 0 ? (hC / hM) * 100 : 0;
+      li.appendChild(buildLabeledBar('status-bar health-fill', `❤️ ${hC.toFixed(1)} / ${hM.toFixed(1)}`, hPct));
+
+      // Hunger bar
+      const huC = Number(player.Hunger?.Current ?? 0);
+      const huM = Number(player.Hunger?.Max ?? 1);
+      const huPct = huM > 0 ? (huC / huM) * 100 : 0;
+      li.appendChild(buildLabeledBar('status-bar hunger-fill', `🍗 ${huC} / ${huM}`, huPct));
+
+      // BodyTemp + BufferTemp
+      const bodyTempRaw = player.BodyTemp;
+      if (bodyTempRaw !== null && bodyTempRaw !== undefined) {
+        const parsed = typeof bodyTempRaw === 'string' ? Number(bodyTempRaw.replace(',', '.')) : Number(bodyTempRaw);
+        const displayTemp = Math.min(37, parsed); // cap at 37
+        const buffer = Math.max(0, Math.min(10, parsed - 37)); // 0–10 scale
+
+        // BodyTemp bar (30–37 °C)
+        const minTemp = 30;
+        const maxTemp = 37;
+        const clampedForBar = Math.max(minTemp, Math.min(maxTemp, displayTemp));
+        const percentBody = ((clampedForBar - minTemp) / (maxTemp - minTemp)) * 100;
+
+        li.appendChild(buildLabeledBar('bodytemp-bar bodytemp-fill', `🌡️ ${displayTemp.toFixed(1)} °C`, percentBody));
+
+        // BufferTemp bar (0–10 scale)
+        const percentBuffer = (buffer / 10) * 100;
+        li.appendChild(buildLabeledBar('tempbuffer-bar tempbuffer-fill', `🔥 +${buffer.toFixed(1)} °C (0–10)`, percentBuffer));
+      } else {
+        li.appendChild(buildLabeledBar('bodytemp-bar bodytemp-fill', '🌡️ N/A', 0));
+        li.appendChild(buildLabeledBar('tempbuffer-bar tempbuffer-fill', '🔥 N/A (0–10)', 0));
+      }
+
+      // Wetness bar
+      const wetnessValue = Number(player.Wetness ?? 0);
+      const wetnessPercent = Math.max(0, Math.min(100, wetnessValue * 100));
+      li.appendChild(buildLabeledBar('wetness-bar wetness-fill', `💧 ${wetnessValue}`, wetnessPercent));
+
+      // Ambient temperature
+      const ambientT = Number(player.Temperature ?? NaN);
+      const envTempColor = isFinite(ambientT) ? getTemperatureColor(ambientT) : "#ffffff";
+      const rain = Number(player.Rainfall ?? 0) > 0 ? " 🌧️" : "";
+      const envEl = document.createElement('div');
+      envEl.innerHTML = `🌡️ Ambient temp: <span class="temp-label" style="color:${envTempColor};">${isFinite(ambientT) ? ambientT.toFixed(1) : 'N/A'} °C</span>${rain}`;
+      li.appendChild(envEl);
+
+      const windLine = document.createElement('div');
+      windLine.innerHTML = `${formatWindChip(player.Wind)}`;
+      li.appendChild(windLine);
+
+      return li;
+    }
+
+    
+    // === Animal emoji picker helper ===
+    function pickAnimalEmoji(str){
+      if (!str) return '';
+      const s = String(str).toLowerCase();
+
+ // Birds
+  if (s.includes('henpoult') || s.includes('pullet')) return '🐥';
+  if (s.includes('chicken-baby')) return '🐔';
+  if (s.includes('chick')) return '🐥';
+  if (s.includes('rooster')) return '🐓';
+  if (s.includes('hen')) return '🐔';
+  if (s.includes('duck')) return '🦆';
+  if (s.includes('owl')) return '🦉';
+
+  // Songbirds
+  if (s.includes('robin')) return '🐦';
+  if (s.includes('waxwing')) return '🐦';
+  if (s.includes('sparrow') || s.includes('house-sparrow')) return '🐦';
+
+  // Other birds
+  if (s.includes('swan')) return '🦢';
+
+  // Mammals
+  if (s.includes('raccoon')) return '🦝';
+  if (s.includes('wolf')) return '🐺';
+  if (s.includes('fox')) return '🦊';
+  if (s.includes('hare')) return '🐇';
+  if (s.includes('goat')) return '🐐';
+  if (s.includes('bear')) return '🐻';
+  if (s.includes('boar')) return '🐗';
+  if (s.includes('deer')) return '🦌';
+  if (s.includes('chipmunk')) return '🐿️';
+  if (s.includes('squirrel')) return '🐿️';
+  if (s.includes('fieldmouse') || s.includes('field-mouse') || s.includes('field mouse')) return '🐭';
+  if (s.includes('hedgehog')) return '🦔';
+  if (s.includes('yak')) return '🐂';
+       if (s.includes('Crow')) return '🐦‍';
+ 
+  // Invertebrates
+  if (s.includes('snail')) return '🐌';
+  if (s.includes('crab')) return '🦀';
+  
+  // Fish
+  if (s.includes('salmon')) return '🐟';
+
+  // Misc
+  if (s.includes('strawdummy')) return '🧍‍♂️';
+      if (s.includes('animal'))   return '🐾';
+      return '';
+    }
+
+    function renderAnimal(animal, spawnPoint) {
+      const li = document.createElement('li');
+
+      const nameEl = document.createElement('div');
+      const typeSuffix = animal.Type ? ` <span class="coords">(${animal.Type})</span>` : '';
+      const __emoji = pickAnimalEmoji(`${animal.Name || ''} ${animal.Type || ''}`);
+      nameEl.innerHTML = `${__emoji || '🐾'} <strong>${animal.Name || 'Unknown animal'}</strong>${typeSuffix}`;
+      li.appendChild(nameEl);
+
+      const coordsEl = document.createElement('div');
+      coordsEl.className = 'coords';
+      const spawnX = spawnPoint?.X ?? 0;
+      const spawnZ = spawnPoint?.Z ?? 0;
+      const ax = (animal.Coordinates?.X ?? 0) - spawnX;
+      const ay = (animal.Coordinates?.Y ?? 0);
+      const az = (animal.Coordinates?.Z ?? 0) - spawnZ;
+      coordsEl.textContent = `(X: ${ax}, Y: ${ay}, Z: ${az})`;
+      li.appendChild(coordsEl);
+
+      const current = Number(animal.Health?.Current ?? 0);
+      const max = Number(animal.Health?.Max ?? 1);
+      const percent = max > 0 ? (current / max) * 100 : 0;
+      li.appendChild(
+        buildLabeledBar(
+          'status-bar health-fill',
+          `❤️ ${current.toFixed(1)} / ${max.toFixed(1)}`,
+          percent
+        )
+      );
+
+      // --- ÚJ: állat környezeti hőmérséklet + eső ikon
+      const aTemp = Number(animal.Temperature ?? NaN);
+      const tempColor = isFinite(aTemp) ? getTemperatureColor(aTemp) : "#ffffff";
+      const aRainIcon = Number(animal.Rainfall ?? 0) > 0 ? " 🌧️" : "";
+      const envLine = document.createElement('div');
+      envLine.innerHTML = `🌡️ Env: <span class="temp-label" style="color:${tempColor};">${isFinite(aTemp) ? aTemp.toFixed(1) : 'N/A'} °C</span>${aRainIcon}`;
+      li.appendChild(envLine);
+
+      const windLineA = document.createElement('div');
+      windLineA.innerHTML = `${formatWindChip(animal.Wind)}`;
+      li.appendChild(windLineA);
+
+      return li;
+    }
+
+    function buildLabeledBar(classes, label, percent, markerPercent) {
+      const [barClass, fillClass] = classes.split(' ');
+      const bar = document.createElement('div');
+      bar.className = barClass;
+
+      const fill = document.createElement('div');
+      fill.className = fillClass;
+      const safePct = Math.max(0, Math.min(100, Number(percent) || 0));
+      fill.style.width = `${safePct}%`;
+      bar.appendChild(fill);
+
+      const labelEl = document.createElement('span');
+      labelEl.className = 'bar-label';
+      labelEl.textContent = label;
+      bar.appendChild(labelEl);
+
+      if (typeof markerPercent === 'number' && isFinite(markerPercent)) {
+        const marker = document.createElement('div');
+        marker.className = 'bodytemp-marker';
+        marker.style.left = `${Math.max(0, Math.min(100, markerPercent))}%`;
+        bar.appendChild(marker);
+      }
+      return bar;
+    }
+
+    function updateServerCount(visible, total) {
+      document.getElementById("serverCount").textContent = `Servers: ${visible} / ${total}`;
+    }
+
+    fetchServerData();
+    setInterval(fetchServerData, 15000);
+  </script>
+</body>
+</html>
