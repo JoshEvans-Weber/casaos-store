@@ -104,7 +104,7 @@
       },
       "category": "Games",
       "version": "0.8.1",
-      "updated": "2026-02-27T01:06:30.310101",
+      "updated": "2026-02-27T01:11:30.157178",
       "image": {
         "amd64": "tes3mp/server:latest"
       }
