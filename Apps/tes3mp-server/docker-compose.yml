@@ -1,0 +1,62 @@
+name: "tes3mp-server"
+services:
+  tes3mp:
+    image: ghcr.io/joshevans-weber/tes3mp-server:latest
+    container_name: tes3mp-server
+    restart: unless-stopped
+    ports:
+      - "0.0.0.0:25565:25565/tcp"
+      - "0.0.0.0:25565:25565/udp"
+    volumes:
+      # Mount ENTIRE server directory to host
+      # All files in container's /tes3mp/server/ are accessible at /DATA/AppData/tes3mp-server/ on host
+      # This includes: configs, data, logs, resources, scripts - EVERYTHING
+      - type: bind
+        source: /DATA/AppData/tes3mp-server
+        target: /tes3mp/server
+        read_only: false
+    environment:
+      # Server configuration - full access to all server files in /DATA/AppData/tes3mp-server/
+      TES3MP_LOGFILE: "/tes3mp/server/data/server.log"
+    stdin_open: true
+    tty: true
+    healthcheck:
+      test: ["CMD-SHELL", "netstat -an | grep 25565 > /dev/null && echo OK || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+x-casaos:
+  architectures: ["amd64"]
+  main: tes3mp
+  title:
+    en_us: "TES3MP Server"
+  icon: "https://raw.githubusercontent.com/JoshEvans-Weber/casaos-store/main/Apps/tes3mp-server/icon.png"
+  author: "TES3MP Team"
+  category: "Games"
+  version: "0.8.1.1"
+  tagline:
+    en_us: "The Elder Scrolls III: Morrowind Multiplayer Server"
+  description:
+    en_us: |
+      Official TES3MP multiplayer server for The Elder Scrolls III: Morrowind
+      
+      Features:
+      - Play Morrowind with other players
+      - Persistent world saves
+      - Built on official OpenMW engine
+      - Highly configurable
+      
+      Game Port: 25565/tcp, 25565/udp
+      
+      🗂️ COMPLETE SERVER ACCESS on Host:
+      All server files accessible at: /DATA/AppData/tes3mp-server/
+      - Server config: /DATA/AppData/tes3mp-server/ (all config files)
+      - Game data: /DATA/AppData/tes3mp-server/data/
+      - Logs: /DATA/AppData/tes3mp-server/data/server.log
+      - Scripts: /DATA/AppData/tes3mp-server/scripts/
+      - Resources: /DATA/AppData/tes3mp-server/resources/ (all subdirs)
+      - All other files visible in /DATA/AppData/tes3mp-server/
+  developer: "TES3MP Team"
+  website: "https://tes3mp.com/"
+  port_map: "25565"
