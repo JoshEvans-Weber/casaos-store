@@ -14,15 +14,28 @@ Official TES3MP server for multiplayer Morrowind gameplay.
 
 - **Game Server**: 25565/tcp, 25565/udp
 
-## File Access
+## 🗂️ Complete File Access
 
-Server configuration and data stored at:
-- `/DATA/AppData/tes3mp-server/data/`
+**ENTIRE SERVER DIRECTORY** is accessible on host at:
+```
+/DATA/AppData/tes3mp-server/
+├── tes3mp-server-default.cfg  (main server config)
+├── tes3mp-server.cfg          (server configuration)
+├── data/                       (game data, saves, logs)
+│   ├── server.log
+│   ├── saves/
+│   └── ...
+├── scripts/                    (server scripts)
+├── resources/                  (game resources)
+└── [all other server files]
+```
 
-### Server Configuration
+### Edit Server Configuration
 
-Edit the configuration file:
-- `/DATA/AppData/tes3mp-server/data/tes3mp-server-default.cfg`
+Edit configuration files directly:
+- `/DATA/AppData/tes3mp-server/tes3mp-server-default.cfg` - Default config
+- `/DATA/AppData/tes3mp-server/tes3mp-server.cfg` - Active server config
+- All files in `/DATA/AppData/tes3mp-server/` are fully editable
 
 Key settings to customize:
 - `hostname` - Your server name
@@ -31,10 +44,33 @@ Key settings to customize:
 - `password` - Optional server password
 - Difficulty, magic, and other gameplay settings
 
-### Server Logs
+### Access Server Data & Saves
 
-View logs at:
-- `/DATA/AppData/tes3mp-server/data/server.log`
+Game saves and world data:
+- `/DATA/AppData/tes3mp-server/data/` - All game data
+- `/DATA/AppData/tes3mp-server/data/saves/` - World saves
+- Edit directly in file manager or terminal
+
+### Access Server Scripts
+
+Server-side scripts:
+- `/DATA/AppData/tes3mp-server/scripts/` - Server scripts directory
+- Modify scripts to change server behavior
+- Some changes require server restart
+
+### Upload Resource Files & Mods
+
+Place custom content:
+- `/DATA/AppData/tes3mp-server/resources/` - Game resources
+- `/DATA/AppData/tes3mp-server/data/` - Additional data files
+- All accessible directly via file manager
+
+### View Server Logs & Debugging
+
+Monitor server activity:
+- `/DATA/AppData/tes3mp-server/data/server.log` - Complete server log
+- Check for errors, connections, events
+- Monitor in real-time or check after restart
 
 ## Usage
 

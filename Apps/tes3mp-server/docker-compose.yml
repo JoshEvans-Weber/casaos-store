@@ -8,15 +8,16 @@ services:
       - "0.0.0.0:25565:25565/tcp"
       - "0.0.0.0:25565:25565/udp"
     volumes:
-      # Server data - worlds, player data, configuration
+      # Mount ENTIRE server directory to host
+      # All files in container's /server/ are accessible at /DATA/AppData/tes3mp-server/ on host
+      # This includes: configs, data, logs, resources, scripts - EVERYTHING
       - type: bind
-        source: /DATA/AppData/tes3mp-server/data
-        target: /tes3mp/server/data
+        source: /DATA/AppData/tes3mp-server
+        target: /server
         read_only: false
     environment:
-      # Server configuration can be edited in the mounted data folder
-      # Modify /DATA/AppData/tes3mp-server/data/tes3mp-server-default.cfg
-      TES3MP_LOGFILE: "/tes3mp/server/data/server.log"
+      # Server configuration - full access to all server files in /DATA/AppData/tes3mp-server/
+      TES3MP_LOGFILE: "/server/data/server.log"
     stdin_open: true
     tty: true
     healthcheck:
@@ -33,7 +34,7 @@ x-casaos:
   icon: "https://raw.githubusercontent.com/JoshEvans-Weber/casaos-store/main/Apps/tes3mp-server/icon.png"
   author: "TES3MP Team"
   category: "Games"
-  version: "0.8.1"
+  version: "0.8.1.1"
   tagline:
     en_us: "The Elder Scrolls III: Morrowind Multiplayer Server"
   description:
@@ -48,8 +49,14 @@ x-casaos:
       
       Game Port: 25565/tcp, 25565/udp
       
-      All server data is stored in /DATA/AppData/tes3mp-server/data/
-      Edit configuration at: /DATA/AppData/tes3mp-server/data/tes3mp-server-default.cfg
+      🗂️ COMPLETE SERVER ACCESS on Host:
+      All server files accessible at: /DATA/AppData/tes3mp-server/
+      - Server config: /DATA/AppData/tes3mp-server/ (all config files)
+      - Game data: /DATA/AppData/tes3mp-server/data/
+      - Logs: /DATA/AppData/tes3mp-server/data/server.log
+      - Scripts: /DATA/AppData/tes3mp-server/scripts/
+      - Resources: /DATA/AppData/tes3mp-server/resources/ (all subdirs)
+      - All other files visible in /DATA/AppData/tes3mp-server/
   developer: "TES3MP Team"
   website: "https://tes3mp.com/"
   port_map: "25565"
