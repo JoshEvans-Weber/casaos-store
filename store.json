@@ -104,7 +104,7 @@
       },
       "category": "Games",
       "version": "0.8.1.1",
-      "updated": "2026-02-27T18:51:25.948838",
+      "updated": "2026-02-27T18:58:51.433904",
       "image": {
         "amd64": "ghcr.io/joshevans-weber/tes3mp-server:latest"
       }
