@@ -92,6 +92,22 @@
         "amd64": "ghcr.io/joshevans-weber/vs-serverquery:1.0.3",
         "arm64": "ghcr.io/joshevans-weber/vs-serverquery:1.0.3"
       }
+    },
+    {
+      "name": "tes3mp-server",
+      "title": {
+        "en_us": "TES3MP Server"
+      },
+      "icon": "https://raw.githubusercontent.com/JoshEvans-Weber/casaos-store/main/Apps/tes3mp-server/icon.png",
+      "tagline": {
+        "en_us": "The Elder Scrolls III: Morrowind Multiplayer"
+      },
+      "category": "Games",
+      "version": "0.8.1.1",
+      "updated": "2026-02-27T19:32:41.055367",
+      "image": {
+        "amd64": "ghcr.io/joshevans-weber/tes3mp-server:latest"
+      }
     }
   ]
 }
