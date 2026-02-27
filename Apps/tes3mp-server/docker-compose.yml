@@ -1,7 +1,7 @@
 name: "tes3mp-server"
 services:
   tes3mp:
-    image: tes3mp/server:latest
+    image: ghcr.io/joshevans-weber/tes3mp-server:latest
     container_name: tes3mp-server
     restart: unless-stopped
     ports:
