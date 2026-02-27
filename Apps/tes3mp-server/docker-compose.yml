@@ -9,15 +9,15 @@ services:
       - "0.0.0.0:25565:25565/udp"
     volumes:
       # Mount ENTIRE server directory to host
-      # All files in container's /tes3mp/server/ are accessible at /DATA/AppData/tes3mp-server/ on host
+      # All files in container's /server/ are accessible at /DATA/AppData/tes3mp-server/ on host
       # This includes: configs, data, logs, resources, scripts - EVERYTHING
       - type: bind
         source: /DATA/AppData/tes3mp-server
-        target: /tes3mp/server
+        target: /server
         read_only: false
     environment:
       # Server configuration - full access to all server files in /DATA/AppData/tes3mp-server/
-      TES3MP_LOGFILE: "/tes3mp/server/data/server.log"
+      TES3MP_LOGFILE: "/server/data/server.log"
     stdin_open: true
     tty: true
     healthcheck:

@@ -21,6 +21,7 @@ Official TES3MP server for multiplayer Morrowind gameplay.
 /DATA/AppData/tes3mp-server/
 ├── tes3mp-server-default.cfg  (main server config)
 ├── tes3mp-server.cfg          (server configuration)
+├── CoreScripts/               (server core scripts)
 ├── data/                       (game data, saves, logs)
 │   ├── server.log
 │   ├── saves/
