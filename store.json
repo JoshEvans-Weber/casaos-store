@@ -103,8 +103,8 @@
         "en_us": "The Elder Scrolls III: Morrowind Multiplayer"
       },
       "category": "Games",
-      "version": "0.8.1",
-      "updated": "2026-02-27T01:33:16.543777",
+      "version": "0.8.1.1",
+      "updated": "2026-02-27T18:51:25.948838",
       "image": {
         "amd64": "ghcr.io/joshevans-weber/tes3mp-server:latest"
       }
