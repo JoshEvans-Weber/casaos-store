@@ -1,0 +1,55 @@
+name: "tes3mp-server"
+services:
+  tes3mp:
+    image: tes3mp/server:latest
+    container_name: tes3mp-server
+    restart: unless-stopped
+    ports:
+      - "0.0.0.0:25565:25565/tcp"
+      - "0.0.0.0:25565:25565/udp"
+    volumes:
+      # Server data - worlds, player data, configuration
+      - type: bind
+        source: /DATA/AppData/tes3mp-server/data
+        target: /tes3mp/server/data
+        read_only: false
+    environment:
+      # Server configuration can be edited in the mounted data folder
+      # Modify /DATA/AppData/tes3mp-server/data/tes3mp-server-default.cfg
+      TES3MP_LOGFILE: "/tes3mp/server/data/server.log"
+    stdin_open: true
+    tty: true
+    healthcheck:
+      test: ["CMD-SHELL", "netstat -an | grep 25565 > /dev/null && echo OK || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+x-casaos:
+  architectures: ["amd64"]
+  main: tes3mp
+  title:
+    en_us: "TES3MP Server"
+  icon: "https://raw.githubusercontent.com/JoshEvans-Weber/casaos-store/main/Apps/tes3mp-server/icon.png"
+  author: "TES3MP Team"
+  category: "Games"
+  version: "0.8.1"
+  tagline:
+    en_us: "The Elder Scrolls III: Morrowind Multiplayer Server"
+  description:
+    en_us: |
+      Official TES3MP multiplayer server for The Elder Scrolls III: Morrowind
+      
+      Features:
+      - Play Morrowind with other players
+      - Persistent world saves
+      - Built on official OpenMW engine
+      - Highly configurable
+      
+      Game Port: 25565/tcp, 25565/udp
+      
+      All server data is stored in /DATA/AppData/tes3mp-server/data/
+      Edit configuration at: /DATA/AppData/tes3mp-server/data/tes3mp-server-default.cfg
+  developer: "TES3MP Team"
+  website: "https://tes3mp.com/"
+  port_map: "25565"
