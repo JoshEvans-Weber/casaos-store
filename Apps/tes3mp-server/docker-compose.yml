@@ -1,22 +1,25 @@
 name: "tes3mp-server"
 services:
   tes3mp:
-    image: ghcr.io/joshevans-weber/tes3mp-server:0.8.1-with-data
+    image: ghcr.io/joshevans-weber/tes3mp-server:latest
     container_name: tes3mp-server
     restart: unless-stopped
     ports:
       - "0.0.0.0:25565:25565/tcp"
       - "0.0.0.0:25565:25565/udp"
     volumes:
-      # Mount only data directories that user can safely edit
-      # This avoids breaking the container initialization
-      # Config files and saves are at /DATA/AppData/tes3mp-server/
+      # Mount only /server/data to avoid breaking initialization
+      # Everything else (CoreScripts, binaries) stays in the container
       - type: bind
         source: /DATA/AppData/tes3mp-server
         target: /server/data
         read_only: false
     environment:
-      # Server configuration - data files accessible at /DATA/AppData/tes3mp-server/
+      # Server configuration via environment variables
+      TES3MP_HOSTNAME: "TES3MP Server"
+      TES3MP_PORT: "25565"
+      TES3MP_MAX_PLAYERS: "64"
+      TES3MP_PASSWORD: ""
       TES3MP_LOGFILE: "/server/data/server.log"
     stdin_open: true
     tty: true
@@ -49,12 +52,14 @@ x-casaos:
       
       Game Port: 25565/tcp, 25565/udp
       
-      � Server Data Access on Host:
-      Data files accessible at: /DATA/AppData/tes3mp-server/
-      - Game saves & world data
-      - Configuration files
-      - Server logs
-      - All player character data
+      🗂️ COMPLETE SERVER ACCESS on Host:
+      All server files accessible at: /DATA/AppData/tes3mp-server/
+      - Server config: /DATA/AppData/tes3mp-server/ (all config files)
+      - Game data: /DATA/AppData/tes3mp-server/data/
+      - Logs: /DATA/AppData/tes3mp-server/data/server.log
+      - Scripts: /DATA/AppData/tes3mp-server/scripts/
+      - Resources: /DATA/AppData/tes3mp-server/resources/ (all subdirs)
+      - All other files visible in /DATA/AppData/tes3mp-server/
   developer: "TES3MP Team"
   website: "https://tes3mp.com/"
   port_map: "25565"
