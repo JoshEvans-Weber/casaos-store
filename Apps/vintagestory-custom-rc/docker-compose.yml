@@ -1,0 +1,64 @@
+name: "vintagestory-custom-rc"
+services:
+  vintagestory:
+    image: ghcr.io/joshevans-weber/vintagestory-custom-rc:1.22.0-rc.1
+    container_name: vs-server-rc1
+    restart: unless-stopped
+    ports:
+      - "0.0.0.0:42420:42420/udp"
+      - "0.0.0.0:42420:42420/tcp"
+      - "0.0.0.0:7681:7681/tcp"
+      - "0.0.0.0:8080:8080/tcp"
+    volumes:
+      # Game server data (worlds, logs, mod configs)
+      - type: bind
+        source: /DATA/AppData/vintagestory-custom-rc/data
+        target: /vintagestory/data
+      # Server binaries - exposed for manual DLL updates and inspection
+      # Available on host at: /DATA/AppData/vintagestory-custom-rc/binaries/
+      - type: bind
+        source: /DATA/AppData/vintagestory-custom-rc/binaries
+        target: /vintagestory/binaries
+        read_only: false
+    environment:
+      - SERVICE=VintagestoryServer.dll
+      - UID_NUMBER=1100
+      - GID_NUMBER=1100
+      - TERMINAL_USER=admin
+      - TERMINAL_PASS=admin
+      - RCON_PASSWORD=rcon
+      - VS_VERSION=1.22-rc.1
+    stdin_open: true
+    tty: true
+    user: "0:0"
+    healthcheck:
+      test: ["CMD-SHELL", "pgrep -f VintagestoryServer > /dev/null && echo OK || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 120s
+x-casaos:
+  architectures: ["amd64"]
+  main: vintagestory
+  title:
+    en_us: "VintageStory (Release Candidate - RC.1)"
+  icon: "https://raw.githubusercontent.com/JoshEvans-Weber/casaos-store/main/Apps/vintagestory-custom-rc/icon.png"
+  author: "JoshEvans-Weber"
+  category: "Games"
+  version: "20260309-1109"
+  tagline:
+    en_us: "Dedicated server with web console"
+  description:
+    en_us: |
+      Vintage Story dedicated server with web console access via ttyd.
+      
+      Game Port: 42420/udp, 42420/tcp
+      Web Console: http://your-ip:7681
+      RCON Port: 8080/tcp
+      
+      Default credentials: admin/admin
+      
+      ✓ Manual DLL Updates: Place updated DLL files in /DATA/AppData/*/binaries/ to upgrade the server version
+  developer: "Anego Studios"
+  website: "https://www.vintagestory.at/"
+  port_map: "7681"
