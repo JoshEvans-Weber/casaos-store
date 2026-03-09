@@ -94,22 +94,6 @@
       }
     },
     {
-      "name": "vintagestory-custom-rc",
-      "title": {
-        "en_us": "VintageStory (Release Candidate)"
-      },
-      "icon": "https://raw.githubusercontent.com/JoshEvans-Weber/casaos-store/main/Apps/vintagestory-custom-rc/icon.png",
-      "tagline": {
-        "en_us": "Dedicated server with web console - 1.22 RC"
-      },
-      "category": "Games",
-      "version": "20260309-1133",
-      "updated": "2026-03-09T17:36:56.340267",
-      "image": {
-        "amd64": "ghcr.io/joshevans-weber/vintagestory-custom-rc:latest"
-      }
-    },
-    {
       "name": "vintagestory-custom-preview",
       "title": {
         "en_us": "VintageStory (Preview)"
@@ -123,6 +107,22 @@
       "updated": "2026-03-09T17:39:59.514372",
       "image": {
         "amd64": "ghcr.io/joshevans-weber/vintagestory-custom-preview:latest"
+      }
+    },
+    {
+      "name": "vintagestory-custom-rc",
+      "title": {
+        "en_us": "VintageStory (Release Candidate)"
+      },
+      "icon": "https://raw.githubusercontent.com/JoshEvans-Weber/casaos-store/main/Apps/vintagestory-custom-rc/icon.png",
+      "tagline": {
+        "en_us": "Dedicated server with web console - 1.22 RC"
+      },
+      "category": "Games",
+      "version": "20260309-1141",
+      "updated": "2026-03-09T17:44:52.028521",
+      "image": {
+        "amd64": "ghcr.io/joshevans-weber/vintagestory-custom-rc:latest"
       }
     }
   ]
