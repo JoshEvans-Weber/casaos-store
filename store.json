@@ -119,8 +119,8 @@
         "en_us": "Dedicated server with web console - 1.22 RC"
       },
       "category": "Games",
-      "version": "20260309-1109",
-      "updated": "2026-03-09T17:13:50.166618",
+      "version": "20260309-1133",
+      "updated": "2026-03-09T17:36:56.340267",
       "image": {
         "amd64": "ghcr.io/joshevans-weber/vintagestory-custom-rc:latest"
       }
