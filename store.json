@@ -134,12 +134,88 @@
       "tagline": {
         "en_us": "Local streaming for Wyze cameras - WebRTC/RTSP/RTMP/HLS"
       },
+      "short_desc": {
+        "en_us": "Local WebRTC/RTSP streaming for Wyze cameras"
+      },
+      "description": {
+        "en_us": "Wyze Bridge provides local streaming access to Wyze cameras via WebRTC, RTSP, RTMP, and HLS protocols without routing through Wyze's cloud servers."
+      },
       "category": "Tools",
       "version": "unknown",
-      "updated": "2026-03-15T04:42:31.373492",
+      "updated": "2026-03-15T04:53:29.432725",
+      "developer": {
+        "name": "mrlt8",
+        "link": "https://github.com/mrlt8/docker-wyze-bridge"
+      },
+      "enable": true,
+      "port_map": "5000",
+      "web_ui": "http://localhost:5000",
+      "scheme": "http",
+      "health_check": "http://localhost:5000",
       "image": {
         "amd64": "ghcr.io/joshevans-weber/wyze-bridge:latest"
-      }
+      },
+      "container_name": "wyze-bridge",
+      "volumes": [
+        {
+          "container": "/media/bridge",
+          "host": "/DATA/AppData/wyze-bridge"
+        }
+      ],
+      "ports": [
+        {
+          "container": "5000",
+          "host": "5000",
+          "protocol": "tcp"
+        },
+        {
+          "container": "8554",
+          "host": "8554",
+          "protocol": "tcp"
+        },
+        {
+          "container": "8888",
+          "host": "8888",
+          "protocol": "tcp"
+        },
+        {
+          "container": "8189",
+          "host": "8189",
+          "protocol": "udp"
+        },
+        {
+          "container": "8889",
+          "host": "8889",
+          "protocol": "tcp"
+        }
+      ],
+      "envs": [
+        {
+          "key": "WB_AUTH",
+          "default": "true",
+          "description": "Enable authentication"
+        },
+        {
+          "key": "WB_PASSWORD",
+          "default": "wyzebridge",
+          "description": "Web UI password"
+        },
+        {
+          "key": "WB_IP",
+          "default": "",
+          "description": "Server IP (optional)"
+        },
+        {
+          "key": "RECORD_ALL",
+          "default": "",
+          "description": "Record all streams"
+        },
+        {
+          "key": "RECORD_PATH",
+          "default": "/media/bridge/recordings",
+          "description": "Recording directory"
+        }
+      ]
     }
   ]
 }
