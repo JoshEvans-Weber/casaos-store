@@ -141,7 +141,7 @@
         "en_us": "Wyze Bridge provides local streaming access to Wyze cameras via WebRTC, RTSP, RTMP, and HLS protocols without routing through Wyze's cloud servers."
       },
       "category": "Tools",
-      "version": "unknown",
+      "version": "20260314-2339",
       "updated": "2026-03-15T04:53:29.432725",
       "developer": {
         "name": "mrlt8",
@@ -215,7 +215,9 @@
           "default": "/media/bridge/recordings",
           "description": "Recording directory"
         }
-      ]
+      ],
+      "id": "wyze-bridge",
+      "app_name": "wyze-bridge"
     }
   ]
 }
