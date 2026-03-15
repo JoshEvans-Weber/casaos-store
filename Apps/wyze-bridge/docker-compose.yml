@@ -2,8 +2,10 @@ version: '3.8'
 
 services:
   wyze-bridge:
+    container_name: casaos-wyze-bridge
     image: ghcr.io/joshevans-weber/wyze-bridge:latest
     restart: unless-stopped
+    network_mode: bridge
     ports:
       - "5000:5000"    # Web UI
       - "8554:8554"    # RTSP
@@ -17,18 +19,6 @@ services:
       - RECORD_ALL=${RECORD_ALL:-}
       - RECORD_PATH=${RECORD_PATH:-/media/bridge/recordings}
     volumes:
-      - wyze-data:/media/bridge
-    networks:
-      - bridge
-
-volumes:
-  wyze-data:
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: /DATA/AppData/wyze-bridge
-
-networks:
-  bridge:
-    driver: bridge
+      - /DATA/AppData/wyze-bridge:/media/bridge
+    stdin_open: false
+    tty: false
