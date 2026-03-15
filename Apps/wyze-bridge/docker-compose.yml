@@ -1,24 +1,86 @@
+name: "wyze-bridge"
 version: '3.8'
 
 services:
   wyze-bridge:
-    container_name: casaos-wyze-bridge
     image: ghcr.io/joshevans-weber/wyze-bridge:latest
+    container_name: wyze-bridge
     restart: unless-stopped
-    network_mode: bridge
     ports:
-      - "5000:5000"    # Web UI
-      - "8554:8554"    # RTSP
-      - "8888:8888"    # Main service
-      - "8189:8189/udp" # WebRTC/ICE
-      - "8889:8889"    # WebRTC
+      - "0.0.0.0:5000:5000/tcp"    # Web UI
+      - "0.0.0.0:8554:8554/tcp"    # RTSP
+      - "0.0.0.0:8888:8888/tcp"    # Main service
+      - "0.0.0.0:8189:8189/udp"   # WebRTC/ICE
+      - "0.0.0.0:8889:8889/tcp"    # WebRTC
+    volumes:
+      - type: bind
+        source: /DATA/AppData/wyze-bridge
+        target: /media/bridge
+        read_only: false
     environment:
       - WB_AUTH=true
       - WB_PASSWORD=${WB_PASSWORD:-wyzebridge}
       - WB_IP=${WB_IP:-}
       - RECORD_ALL=${RECORD_ALL:-}
       - RECORD_PATH=${RECORD_PATH:-/media/bridge/recordings}
-    volumes:
-      - /DATA/AppData/wyze-bridge:/media/bridge
-    stdin_open: false
-    tty: false
+    stdin_open: true
+    tty: true
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+x-casaos:
+  architectures: ["amd64"]
+  main: wyze-bridge
+  title:
+    en_us: "Wyze Bridge"
+  icon: "https://raw.githubusercontent.com/JoshEvans-Weber/casaos-store/main/Apps/wyze-bridge/icon.png"
+  author: "mrlt8"
+  category: "Tools"
+  version: "2.10.3"
+  tagline:
+    en_us: "Local WebRTC/RTSP streaming for Wyze cameras"
+  description:
+    en_us: |
+      Wyze Bridge creates a local gateway for streaming Wyze camera feeds via WebRTC or RTSP protocols.
+      
+      Features:
+      - View cameras via WebRTC (direct browser support)
+      - RTSP streaming for compatible players
+      - Local processing - no cloud dependency
+      - Automatic camera discovery
+      - JSON API for integrations
+      
+      Web UI: http://host:5000
+      RTSP Port: 8554
+  
+  web_ui:
+    http: "5000"
+  
+  ports:
+    - container_port: "5000"
+      description:
+        en_us: "Web UI Dashboard"
+    - container_port: "8554"
+      description:
+        en_us: "RTSP Streaming"
+    - container_port: "8888"
+      description:
+        en_us: "Main Service"
+    - container_port: "8189"
+      description:
+        en_us: "WebRTC/ICE"
+    - container_port: "8889"
+      description:
+        en_us: "WebRTC Signaling"
+  
+  schemes:
+    - http://
+  
+  host_paths:
+    - path: "/DATA/AppData/wyze-bridge"
+      description:
+        en_us: "Wyze Bridge data directory"
