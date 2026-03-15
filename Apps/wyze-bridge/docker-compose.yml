@@ -19,7 +19,7 @@ services:
         read_only: false
     environment:
       - WB_AUTH=true
-      - WB_PASSWORD=${WB_PASSWORD:-wyzebridge}
+      - WB_PASSWORD=${WB_PASSWORD}
       - WB_IP=${WB_IP:-}
       - RECORD_ALL=${RECORD_ALL:-}
       - RECORD_PATH=${RECORD_PATH:-/media/bridge/recordings}
