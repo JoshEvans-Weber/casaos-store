@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  wyze-bridge:
+    image: mrlt8/wyze-bridge:latest
+    container_name: wyze-bridge
+    restart: unless-stopped
+    ports:
+      - "5000:5000"    # Web UI
+      - "8554:8554"    # RTSP
+      - "8888:8888"    # Main service
+      - "8189:8189/udp" # WebRTC/ICE
+      - "8889:8889"    # WebRTC
+    environment:
+      - WB_AUTH=true
+      - WB_PASSWORD=${WB_PASSWORD:-wyzebridge}
+      - WB_IP=${WB_IP:-}
+      - RECORD_ALL=${RECORD_ALL:-}
+      - RECORD_PATH=${RECORD_PATH:-/media/bridge/recordings}
+    volumes:
+      - wyze-data:/media/bridge
+    networks:
+      - bridge
+
+volumes:
+  wyze-data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /DATA/AppData/wyze-bridge
+
+networks:
+  bridge:
+    driver: bridge
