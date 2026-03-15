@@ -54,8 +54,14 @@ x-casaos:
       - Automatic camera discovery
       - JSON API for integrations
       
-      Web UI: http://host:5000
-      RTSP Port: 8554
+      WebUI Access:
+      - URL: http://host:5000
+      - Username: admin
+      - Password: (first part of your Wyze email, e.g., "john123" for john123@wyze.com)
+      
+      Streaming Ports:
+      - RTSP: 8554
+      - WebRTC: 8889
   
   web_ui:
     http: "5000"
