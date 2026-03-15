@@ -124,6 +124,22 @@
       "image": {
         "amd64": "ghcr.io/joshevans-weber/vintagestory-custom-rc:latest"
       }
+    },
+    {
+      "name": "wyze-bridge",
+      "title": {
+        "en_us": "Wyze Bridge"
+      },
+      "icon": "https://raw.githubusercontent.com/JoshEvans-Weber/casaos-store/main/Apps/wyze-bridge/icon.png",
+      "tagline": {
+        "en_us": "Local streaming for Wyze cameras - WebRTC/RTSP/RTMP/HLS"
+      },
+      "category": "Tools",
+      "version": "unknown",
+      "updated": "2026-03-15T04:42:31.373492",
+      "image": {
+        "amd64": "ghcr.io/joshevans-weber/wyze-bridge:latest"
+      }
     }
   ]
 }
