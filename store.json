@@ -136,7 +136,7 @@
       },
       "category": "Tools",
       "version": "2.10.3",
-      "updated": "2026-03-15T00:06:05.134830",
+      "updated": "2026-03-15T00:49:49.083213",
       "image": {
         "amd64": "ghcr.io/joshevans-weber/wyze-bridge:latest"
       }
