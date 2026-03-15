@@ -19,6 +19,7 @@ services:
         read_only: false
     environment:
       - WB_AUTH=true
+      - WB_USERNAME=${WB_USERNAME:-admin}
       - WB_PASSWORD=${WB_PASSWORD}
       - WB_IP=${WB_IP:-}
       - RECORD_ALL=${RECORD_ALL:-}
