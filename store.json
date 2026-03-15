@@ -126,7 +126,6 @@
       }
     },
     {
-      "id": "wyze-bridge",
       "name": "wyze-bridge",
       "title": {
         "en_us": "Wyze Bridge"
@@ -136,28 +135,11 @@
         "en_us": "Local WebRTC/RTSP streaming for Wyze cameras"
       },
       "category": "Tools",
-      "version": "unknown",
-      "short_desc": {
-        "en_us": "View Wyze cameras via WebRTC or RTSP streams"
-      },
-      "description": {
-        "en_us": "Wyze Bridge allows you to access your Wyze cameras through WebRTC or RTSP streaming protocols. Creates a private, local streaming gateway for your devices."
-      },
-      "port_map": "5000",
+      "version": "2.10.3",
+      "updated": "2026-03-15T00:06:05.134830",
       "image": {
         "amd64": "ghcr.io/joshevans-weber/wyze-bridge:latest"
-      },
-      "web_ui": {
-        "http": "5000"
-      },
-      "author": "mrlt8",
-      "developer": {
-        "name": "mrlt8",
-        "website": "https://github.com/mrlt8/wyze-bridge"
-      },
-      "support": "https://github.com/mrlt8/wyze-bridge/issues",
-      "source": "https://github.com/mrlt8/wyze-bridge",
-      "updates": "https://github.com/mrlt8/wyze-bridge/releases"
+      }
     }
   ]
 }
