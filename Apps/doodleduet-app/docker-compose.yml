@@ -1,0 +1,74 @@
+version: '3.8'
+
+x-casaos: &x-casaos
+  architectures:
+    - amd64
+  main: doodleduet-app
+  title:
+    en_us: DoodleDuet
+  icon: https://raw.githubusercontent.com/JoshEvans-Weber/casaos-store/main/Apps/doodleduet-app/icon.png
+  author: aiyuayaan & Contributors
+  category: Games
+  version: 1.0.0
+  tagline:
+    en_us: Real-time collaborative drawing application with live chat
+  description:
+    en_us: "DoodleDuet is a real-time collaborative drawing application built with Next.js 15, Socket.IO, and Redis. Draw together with friends on an infinite canvas with pan, zoom, and color controls. Features include live text chat, multiple brush sizes, room management, and admin controls."
+  web_ui: http://localhost:3000
+  ports:
+    - target: 3000
+      published: 3000
+      protocol: tcp
+  schemes: []
+  host_paths:
+    - path: /DATA/AppData/doodleduet-app
+      label: DoodleDuet Data
+
+services:
+  redis:
+    image: redis:7-alpine
+    container_name: doodleduet-redis
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+    volumes:
+      - type: bind
+        source: /DATA/AppData/doodleduet-app
+        target: /data
+    command: redis-server --appendonly yes --dir /data
+    restart: unless-stopped
+    networks:
+      - doodleduet
+
+  doodleduet-app:
+    image: aiyuayaan/doodleduet-app:v1.0.0
+    container_name: doodleduet-app
+    <<: *x-casaos
+    ports:
+      - 0.0.0.0:3000:3000/tcp
+    depends_on:
+      redis:
+        condition: service_healthy
+    environment:
+      - REDIS_URL=redis://redis:6379
+      - NODE_ENV=production
+      - NEXT_PUBLIC_API_URL=http://localhost:3000
+    volumes:
+      - type: bind
+        source: /DATA/AppData/doodleduet-app
+        target: /app/data
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:3000" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    restart: unless-stopped
+    networks:
+      - doodleduet
+
+networks:
+  doodleduet:
+    driver: bridge
