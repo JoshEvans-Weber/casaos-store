@@ -5,9 +5,7 @@ services:
     image: redis:7-alpine
     container_name: doodleduet-redis
     volumes:
-      - type: bind
-        source: /DATA/AppData/doodleduet-app
-        target: /data
+      - doodleduet-data:/data
     command: "redis-server --appendonly yes --dir /data"
     restart: unless-stopped
     networks:
@@ -25,9 +23,7 @@ services:
       - NODE_ENV=production
       - NEXT_PUBLIC_API_URL=http://localhost:9002
     volumes:
-      - type: bind
-        source: /DATA/AppData/doodleduet-app
-        target: /app/data
+      - doodleduet-data:/app/data
     restart: unless-stopped
     networks:
       - doodleduet
@@ -35,6 +31,10 @@ services:
 networks:
   doodleduet:
     driver: bridge
+
+volumes:
+  doodleduet-data:
+    driver: local
 
 x-casaos:
   architectures: ["amd64"]
@@ -55,6 +55,3 @@ x-casaos:
       published: 9002
       protocol: tcp
   schemes: []
-  host_paths:
-    - path: /DATA/AppData/doodleduet-app
-      label: DoodleDuet Data
