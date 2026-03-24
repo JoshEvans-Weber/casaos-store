@@ -19,13 +19,13 @@ services:
     container_name: doodleduet-app
     entrypoint: ["/bin/sh", "-c", "npm start"]
     ports:
-      - 0.0.0.0:3000:3000/tcp
+      - 0.0.0.0:9002:9002/tcp
     depends_on:
       - redis
     environment:
       - REDIS_URL=redis://redis:6379
       - NODE_ENV=production
-      - NEXT_PUBLIC_API_URL=http://localhost:3000
+      - NEXT_PUBLIC_API_URL=http://localhost:9002
     volumes:
       - type: bind
         source: /DATA/AppData/doodleduet-app
@@ -51,10 +51,10 @@ x-casaos:
     en_us: Real-time collaborative drawing application with live chat
   description:
     en_us: "DoodleDuet is a real-time collaborative drawing application built with Next.js 15, Socket.IO, and Redis. Draw together with friends on an infinite canvas with pan, zoom, and color controls. Features include live text chat, multiple brush sizes, room management, and admin controls."
-  web_ui: http://localhost:3000
+  web_ui: http://localhost:9002
   ports:
-    - target: 3000
-      published: 3000
+    - target: 9002
+      published: 9002
       protocol: tcp
   schemes: []
   host_paths:
