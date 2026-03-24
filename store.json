@@ -27,8 +27,8 @@
         "en_us": "DoodleDuet is a real-time collaborative drawing application. Draw together on an infinite canvas with friends, with live chat, multiple brush sizes, and admin controls."
       },
       "category": "Games",
-      "version": "1.0.0",
-      "updated": "2026-03-22T00:00:00",
+      "version": "1.0.1",
+      "updated": "2026-03-23T00:00:00",
       "image": {
         "amd64": "aiyuayaan/doodleduet-app:v1.0.0"
       }

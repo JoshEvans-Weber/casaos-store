@@ -59,7 +59,7 @@ x-casaos:
   icon: https://raw.githubusercontent.com/JoshEvans-Weber/casaos-store/main/Apps/doodleduet-app/icon.png
   author: aiyuayaan & Contributors
   category: Games
-  version: 1.0.0
+  version: 1.0.1
   tagline:
     en_us: Real-time collaborative drawing application with live chat
   description:
