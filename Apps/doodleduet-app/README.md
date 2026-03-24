@@ -15,11 +15,35 @@ Real-time collaborative drawing application with Next.js 15, Socket.IO, and Redi
 
 ## Ports
 
-- **3000/tcp**: Web UI and API
+- **9002/tcp**: Web UI and API
 
-## Storage
+## Storage Options
 
-- `/DATA/AppData/doodleduet-app/`: Redis data persistence and application cache
+### Option 1: Named Volumes (Recommended - Default)
+
+The default `docker-compose.yml` uses Docker named volumes:
+- Data stored in Docker's managed location
+- Auto-created on first deployment
+- Works on all systems including CasaOS
+- **No manual setup required**
+
+Volume name: `doodleduet_doodleduet-data`
+
+### Option 2: Bind Mount to `/DATA/AppData/doodleduet`
+
+If you want data at a specific path on your host:
+
+1. **Create the directory first** (required):
+   ```bash
+   mkdir -p /DATA/AppData/doodleduet
+   chmod 755 /DATA/AppData/doodleduet
+   ```
+
+2. **Use the bind mount docker-compose**:
+   - Replace `docker-compose.yml` with `docker-compose.bind-mount.yml`
+   - Redeploy the app in CasaOS
+
+This stores Redis and application data at `/DATA/AppData/doodleduet/` on your host machine.
 
 ## Getting Started
 
@@ -29,7 +53,7 @@ Real-time collaborative drawing application with Next.js 15, Socket.IO, and Redi
 2. Search for "DoodleDuet"
 3. Click "Install"
 4. Wait for the application to start
-5. Access the web UI at `http://<casa-ip>:3000`
+5. Access the web UI at `http://<casa-ip>:9002`
 
 ### Docker Compose
 
@@ -45,7 +69,7 @@ The application uses the following environment variables:
 
 - `REDIS_URL`: Redis connection URL (default: `redis://redis:6379`)
 - `NODE_ENV`: Environment mode (default: `production`)
-- `NEXT_PUBLIC_API_URL`: Frontend API URL (default: `http://localhost:3000`)
+- `NEXT_PUBLIC_API_URL`: Frontend API URL (default: `http://localhost:9002`)
 
 ### Advanced Configuration
 
@@ -65,7 +89,7 @@ To expose on a different port:
 
 ```yaml
 ports:
-  - "8080:3000/tcp"  # Access via http://localhost:8080
+  - "8080:9002/tcp"  # Access via http://localhost:8080
 ```
 
 ## Storage and Persistence
@@ -78,7 +102,7 @@ ports:
 
 ### Accessing Admin Panel
 
-1. Navigate to `http://<casa-ip>:3000/admin`
+1. Navigate to `http://<casa-ip>:9002/admin`
 2. Authenticate with admin credentials
 3. Manage rooms, users, and moderation
 
@@ -101,13 +125,13 @@ docker logs doodleduet-redis
 
 **Common issues:**
 - Redis not running: Check `docker logs doodleduet-redis`
-- Port 3000 already in use: Modify port mapping in docker-compose.yml
+- Port 9002 already in use: Modify port mapping in docker-compose.yml
 - Network issues: Ensure containers can communicate on the `doodleduet` network
 
 ### Connection issues
 
 - **"Cannot connect to Redis"**: Verify `REDIS_URL` environment variable
-- **"WebSocket connection failed"**: Check firewall rules, ensure port 3000 is accessible
+- **"WebSocket connection failed"**: Check firewall rules, ensure port 9002 is accessible
 - **Performance lag**: Redis may be under load; check `docker stats`
 
 ### Data not persisting
