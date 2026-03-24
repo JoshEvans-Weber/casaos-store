@@ -16,7 +16,6 @@ services:
   doodleduet-app:
     image: ghcr.io/joshevans-weber/doodleduet-app:v1.0.0
     container_name: doodleduet-app
-    entrypoint: ["/bin/sh", "-c", "npm start"]
     ports:
       - 0.0.0.0:9002:9002/tcp
     depends_on:
