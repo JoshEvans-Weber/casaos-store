@@ -30,7 +30,7 @@
       "version": "1.0.1",
       "updated": "2026-03-23T00:00:00",
       "image": {
-        "amd64": "aiyuayaan/doodleduet-app:v1.0.0"
+        "amd64": "ghcr.io/joshevans-weber/doodleduet-app:v1.0.0"
       }
     },
     {
