@@ -29,21 +29,25 @@ The default `docker-compose.yml` uses Docker named volumes:
 
 Volume name: `doodleduet_doodleduet-data`
 
-### Option 2: Bind Mount to `/DATA/AppData/doodleduet`
+### Option 2: Bind Mount to `/DATA/AppData/{doodleduet,redis}`
 
-If you want data at a specific path on your host:
+If you want data at specific paths on your host:
 
-1. **Create the directory first** (required):
+1. **Create the directories first** (required):
    ```bash
    mkdir -p /DATA/AppData/doodleduet
+   mkdir -p /DATA/AppData/redis
    chmod 755 /DATA/AppData/doodleduet
+   chmod 755 /DATA/AppData/redis
    ```
 
 2. **Use the bind mount docker-compose**:
    - Replace `docker-compose.yml` with `docker-compose.bind-mount.yml`
    - Redeploy the app in CasaOS
 
-This stores Redis and application data at `/DATA/AppData/doodleduet/` on your host machine.
+This stores:
+- **Redis data** at `/DATA/AppData/redis/`
+- **DoodleDuet app data** at `/DATA/AppData/doodleduet/`
 
 ## Getting Started
 
@@ -94,9 +98,16 @@ ports:
 
 ## Storage and Persistence
 
-- **Redis Data**: Stored in `/DATA/AppData/doodleduet-app/`
+### Named Volumes (Default)
+- **Redis Data**: Auto-managed Docker volume `doodleduet_doodleduet-data`
+- **App Data**: Same volume at `/app/data`
 - **Persistence**: Redis AOF (Append-Only File) enabled for durability
-- **Backup**: Copy the `/DATA/AppData/doodleduet-app/` directory to backup
+
+### Bind Mounts (Optional)
+- **Redis Data**: `/DATA/AppData/redis/`
+- **App Data**: `/DATA/AppData/doodleduet/`
+- **Persistence**: Redis AOF (Append-Only File) enabled for durability
+- **Backup**: Copy both directories to backup
 
 ## Admin Guide
 
@@ -136,8 +147,8 @@ docker logs doodleduet-redis
 
 ### Data not persisting
 
-1. Check `/DATA/AppData/doodleduet-app/` permissions
-2. Verify Redis is writing to `/data` directory
+1. Check `/DATA/AppData/doodleduet/` and `/DATA/AppData/redis/` permissions
+2. Verify Redis is writing to `/DATA/AppData/redis/` directory
 3. Check disk space: `df -h /DATA`
 
 ## Performance Tuning
