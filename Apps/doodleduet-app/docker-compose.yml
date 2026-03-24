@@ -15,7 +15,7 @@ services:
     image: ghcr.io/joshevans-weber/doodleduet-app:v1.0.0
     container_name: doodleduet-app
     ports:
-      - 0.0.0.0:9002:9002/tcp
+      - 9002:9002
     depends_on:
       - redis
     environment:
