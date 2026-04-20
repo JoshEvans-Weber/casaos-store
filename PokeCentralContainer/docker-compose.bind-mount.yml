@@ -1,0 +1,66 @@
+version: '3.8'
+
+services:
+  pokecentral:
+    image: ghcr.io/joshevans-weber/pokecentral:latest
+    container_name: pokecentral
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=UTC
+      - TITLE=PokeCentral
+      - CUSTOM_REPOS=ghcr.io/joshevans-weber
+    ports:
+      - "6080:3000"
+    volumes:
+      - /DATA/AppData/pokecentral/config:/config
+      - /DATA/AppData/pokecentral/roms:/config/roms
+      - /DATA/AppData/pokecentral/saves:/config/saves
+    restart: unless-stopped
+    shm_size: 512mb
+
+x-casaos:
+  architectures:
+    - amd64
+    - arm64
+  author: JoshEvans-Weber
+  category: Games
+  description:
+    en_us: |
+      Multi-emulator gaming hub with browser-based access.
+      
+      Features:
+      - mGBA: Play Game Boy, GBC, and GBA games
+      - MelonDS: Play Nintendo DS games
+      - OpenHome: ROM management and file transfers
+      - Web-based desktop (XFCE) accessible from any device
+      - Persistent storage for ROMs and save files
+      
+      Access via http://localhost:6080
+      
+      NOTE: This version uses bind mounts at /DATA/AppData/pokecentral/
+      Ensure directories exist before deploying (use setup-bind-mount.sh)
+  develop_mode: false
+  hostname: pokecentral
+  icon: https://raw.githubusercontent.com/JoshEvans-Weber/casaos-store/main/Apps/pokecentral/icon.png
+  index: /
+  is_uncontrolled: false
+  main: pokecentral
+  port_map: "6080"
+  ports:
+    pokecentral:
+      default: 6080
+      protocol: tcp
+  screenshot_link:
+    - https://raw.githubusercontent.com/JoshEvans-Weber/casaos-store/main/Apps/pokecentral/screenshot-1.png
+  scheme: http
+  short_desc:
+    en_us: Multi-emulator gaming hub with web access
+  tagline:
+    en_us: Play GB/GBA/DS games from your browser
+  title:
+    en_us: PokeCentral (Bind Mount)
+  tips:
+    custom_repos: Allows docker images from custom registries
+  version: latest
+  web_ui: http://localhost:6080

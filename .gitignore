@@ -1,0 +1,30 @@
+# Environment variables and secrets
+.env
+.env.local
+.env.*.local
+
+# GitHub tokens and credentials
+.gh-*-token
+*.token
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Build artifacts
+build/
+dist/
+*.log
+
+# Dependencies
+node_modules/
+venv/
+.Python
+*.egg-info/
+
+# OS files
+.DS_Store
+Thumbs.db

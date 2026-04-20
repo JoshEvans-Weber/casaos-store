@@ -15,48 +15,6 @@
   ],
   "apps": [
     {
-      "name": "doodleduet-app",
-      "title": {
-        "en_us": "DoodleDuet"
-      },
-      "icon": "https://raw.githubusercontent.com/JoshEvans-Weber/casaos-store/main/Apps/doodleduet-app/icon.png",
-      "tagline": {
-        "en_us": "Real-time collaborative drawing application with live chat"
-      },
-      "description": {
-        "en_us": "DoodleDuet is a real-time collaborative drawing application. Draw together on an infinite canvas with friends, with live chat, multiple brush sizes, and admin controls."
-      },
-      "category": "Games",
-      "version": "1.0.2",
-      "updated": "2026-03-24T00:00:00",
-      "image": {
-        "amd64": "ghcr.io/joshevans-weber/doodleduet-app:v1.0.0"
-      },
-      "port": 9002,
-      "scheme": "http"
-    },
-    {
-      "name": "pokecentral",
-      "title": {
-        "en_us": "PokeCentral"
-      },
-      "icon": "https://raw.githubusercontent.com/JoshEvans-Weber/casaos-store/main/Apps/pokecentral/icon.png",
-      "tagline": {
-        "en_us": "Multi-emulator gaming hub with Game Boy and Nintendo DS support"
-      },
-      "description": {
-        "en_us": "Browser-accessible game emulation hub featuring mGBA (Game Boy/GBC/GBA) and MelonDS (Nintendo DS) with OpenHome ROM manager. Desktop shortcuts for easy access to games, with persistent storage for ROMs and save files."
-      },
-      "category": "Games",
-      "version": "1.0.0",
-      "updated": "2026-04-19T00:00:00",
-      "image": {
-        "amd64": "ghcr.io/joshevans-weber/pokecentral:latest"
-      },
-      "port": 6080,
-      "scheme": "http"
-    },
-    {
       "name": "vintagestory-original",
       "title": {
         "en_us": "Vintage Story (Original)"
@@ -158,16 +116,13 @@
       },
       "icon": "https://raw.githubusercontent.com/JoshEvans-Weber/casaos-store/main/Apps/vintagestory-custom-rc/icon.png",
       "tagline": {
-        "en_us": "Dedicated server with web console - 1.22 RC (Latest: rc.7)"
+        "en_us": "Dedicated server with web console - 1.22 RC"
       },
       "category": "Games",
-      "version": "1.22.0-rc.7",
-      "updated": "2026-04-07T00:00:00",
+      "version": "20260309-1144",
+      "updated": "2026-03-09T17:48:14.512097",
       "image": {
-        "amd64": "ghcr.io/joshevans-weber/vintagestory-server:1.22.0-rc.7"
-      },
-      "description": {
-        "en_us": "Dedicated server with web console. Available RC versions: rc.7, rc.6, rc.5, rc.4, rc.3, rc.2"
+        "amd64": "ghcr.io/joshevans-weber/vintagestory-custom-rc:latest"
       }
     },
     {
