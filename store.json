@@ -57,6 +57,27 @@
       "scheme": "http"
     },
     {
+      "name": "excalidraw",
+      "title": {
+        "en_us": "Excalidraw Full"
+      },
+      "icon": "https://raw.githubusercontent.com/JoshEvans-Weber/casaos-store/main/Apps/excalidraw/icon.png",
+      "tagline": {
+        "en_us": "Collaborative web-based drawing application"
+      },
+      "description": {
+        "en_us": "Excalidraw Full is a feature-rich collaborative drawing application with an infinite canvas. Create diagrams, sketches, and drawings with real-time collaboration support. Built from the excalidraw-full repository with extended functionality."
+      },
+      "category": "Utilities",
+      "version": "1.0.0",
+      "updated": "2026-05-04T00:00:00",
+      "image": {
+        "amd64": "ghcr.io/joshevans-weber/excalidraw:latest"
+      },
+      "port": 5080,
+      "scheme": "http"
+    },
+    {
       "name": "vintagestory-original",
       "title": {
         "en_us": "Vintage Story (Original)"

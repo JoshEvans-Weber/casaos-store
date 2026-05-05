@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  excalidraw:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: ghcr.io/joshevans-weber/excalidraw:latest
+    container_name: excalidraw
+    ports:
+      - "5080:3002"
+    environment:
+      NODE_ENV: production
+    volumes:
+      - excalidraw-data:/config/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3002"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+volumes:
+  excalidraw-data:
+    driver: local

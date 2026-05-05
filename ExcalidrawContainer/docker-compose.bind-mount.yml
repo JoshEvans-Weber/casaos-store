@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  excalidraw:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: ghcr.io/joshevans-weber/excalidraw:latest
+    container_name: excalidraw
+    ports:
+      - "5080:3000"
+    environment:
+      NODE_ENV: production
+      VITE_APP_COLLAB_API_SERVER_URL: ""
+      VITE_APP_WS_SERVER_URL: ""
+    volumes:
+      - ./data:/config/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
