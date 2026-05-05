@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  excalidraw:
+    image: ghcr.io/joshevans-weber/excalidraw:latest
+    container_name: excalidraw
+    ports:
+      - "5080:3002"
+    environment:
+      NODE_ENV: production
+    volumes:
+      - excalidraw-data:/config/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3002"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+volumes:
+  excalidraw-data:
+    driver: local
+
+x-casaos:
+  architectures: ["amd64"]
+  main: excalidraw
+  title:
+    en_us: Excalidraw Full
+  icon: https://raw.githubusercontent.com/JoshEvans-Weber/casaos-store/main/Apps/excalidraw/icon.png
+  author: BetterAndBetterII & Contributors
+  category: Utilities
+  version: 1.0.0
+  tagline:
+    en_us: Collaborative web-based drawing application
+  description:
+    en_us: Excalidraw Full is a feature-rich collaborative drawing application with an infinite canvas. Create diagrams, sketches, and drawings with real-time collaboration support. Built from the excalidraw-full repository with extended functionality.
+  port_map: "5080"
