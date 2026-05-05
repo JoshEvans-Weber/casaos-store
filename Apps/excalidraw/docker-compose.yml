@@ -7,9 +7,12 @@ services:
     ports:
       - "5080:3002"
     environment:
-      NODE_ENV: production
+      - NODE_ENV=production
+      - VITE_APP_WS_SERVER_URL=${WS_SERVER_URL:-http://localhost:5080}
+      - VITE_APP_BACKEND_V2_GET_URL=${BACKEND_URL:-http://localhost:5080/api/v2/}
+      - VITE_APP_BACKEND_V2_POST_URL=${BACKEND_URL:-http://localhost:5080/api/v2/}
     volumes:
-      - excalidraw-data:/config/data
+      - /DATA/Appdata/excalidraw/config/data:/config/data
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:3002"]
@@ -17,10 +20,6 @@ services:
       timeout: 10s
       retries: 3
       start_period: 40s
-
-volumes:
-  excalidraw-data:
-    driver: local
 
 x-casaos:
   architectures: ["amd64"]
