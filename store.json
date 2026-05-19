@@ -34,7 +34,7 @@
       "version": "1.0.0",
       "updated": "2026-05-18T00:00:00",
       "image": {
-        "amd64": "docmost/docmost:latest"
+        "amd64": "ghcr.io/joshevans-weber/docmost:latest"
       },
       "port": 3000,
       "scheme": "http"

@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   docmost:
-    image: docmost/docmost:latest
+    image: ghcr.io/joshevans-weber/docmost:latest
     container_name: docmost
     ports:
       - "3000:3000"
