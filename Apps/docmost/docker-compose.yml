@@ -1,0 +1,70 @@
+version: '3.8'
+
+services:
+  docmost:
+    image: docmost/docmost:latest
+    container_name: docmost
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+      - redis
+    environment:
+      - APP_URL=${APP_URL:-http://localhost:3000}
+      - APP_SECRET=${APP_SECRET:-change-me-to-a-random-secret-key-32-chars-min}
+      - DATABASE_URL=${DATABASE_URL:-postgresql://docmost:docmost_password@db:5432/docmost}
+      - REDIS_URL=${REDIS_URL:-redis://redis:6379}
+    volumes:
+      - /DATA/Appdata/docmost/storage:/app/data/storage
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  db:
+    image: postgres:18
+    container_name: docmost-db
+    environment:
+      - POSTGRES_DB=docmost
+      - POSTGRES_USER=docmost
+      - POSTGRES_PASSWORD=${DB_PASSWORD:-docmost_password}
+    volumes:
+      - /DATA/Appdata/docmost/db_data:/var/lib/postgresql/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U docmost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:8
+    container_name: docmost-redis
+    command: ["redis-server", "--appendonly", "yes", "--maxmemory-policy", "noeviction"]
+    volumes:
+      - /DATA/Appdata/docmost/redis_data:/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+
+x-casaos:
+  architectures: ["amd64"]
+  main: docmost
+  title:
+    en_us: Docmost
+  icon: https://raw.githubusercontent.com/JoshEvans-Weber/casaos-store/main/Apps/docmost/icon.png
+  author: Docmost Contributors
+  category: Office
+  version: 1.0.0
+  tagline:
+    en_us: Collaborative document management and knowledge base
+  description:
+    en_us: Docmost is a collaborative document management platform that allows teams to create, organize, and share documents. Features real-time collaboration, rich text editing, and a powerful knowledge base system. Requires PostgreSQL and Redis.
+  port_map: "3000"
+  scheme: http

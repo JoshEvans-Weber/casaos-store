@@ -6,6 +6,10 @@
       "font": "gamepad"
     },
     {
+      "name": "Office",
+      "font": "file-text"
+    },
+    {
       "name": "Utilities",
       "font": "wrench"
     }
@@ -14,6 +18,27 @@
     "vintagestory-custom"
   ],
   "apps": [
+    {
+      "name": "docmost",
+      "title": {
+        "en_us": "Docmost"
+      },
+      "icon": "https://raw.githubusercontent.com/JoshEvans-Weber/casaos-store/main/Apps/docmost/icon.png",
+      "tagline": {
+        "en_us": "Collaborative document management and knowledge base"
+      },
+      "description": {
+        "en_us": "Docmost is a collaborative document management platform that allows teams to create, organize, and share documents. Features real-time collaboration, rich text editing, and a powerful knowledge base system. Includes PostgreSQL database and Redis cache."
+      },
+      "category": "Office",
+      "version": "1.0.0",
+      "updated": "2026-05-18T00:00:00",
+      "image": {
+        "amd64": "docmost/docmost:latest"
+      },
+      "port": 3000,
+      "scheme": "http"
+    },
     {
       "name": "doodleduet-app",
       "title": {
