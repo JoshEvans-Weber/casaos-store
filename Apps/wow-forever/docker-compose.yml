@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  wow-forever:
+    image: ghcr.io/joshevans-weber/wow-forever-appliance:latest
+    container_name: wow-forever
+    restart: unless-stopped
+    environment:
+      # ---------------------------------------------------------------
+      # >>> EDIT THIS before you install: this machine's LAN IP. <<<
+      # SERVER_IP is what every WoW client is told to connect to, and a
+      # container cannot reliably detect the host's own reachable IP,
+      # so it is mandatory. The container refuses to start without it.
+      # ---------------------------------------------------------------
+      - SERVER_IP=192.168.1.100
+      # Which realms to boot: "all" (default) or a comma list, e.g. "70" or "70,73".
+      - REALM_IDS=all
+    ports:
+      - "8080:8080"   # self-serve account registration (web)
+      - "8081:8081"   # Battle.net REST (https)
+      - "1119:1119"   # Battle.net game port (TCP)
+      - "8085:8085"   # realm 70 - Trinity (PvE)
+      - "8095:8095"   # realm 71 - PvP
+      - "8105:8105"   # realm 72 - RP
+      - "8115:8115"   # realm 73 - Hardcore
+    volumes:
+      # MariaDB data. Survives container recreation; first boot imports
+      # the bundled dumps into this directory (a few minutes).
+      - /DATA/Appdata/wow-forever/mysql:/var/lib/mysql
+    healthcheck:
+      # curl is not in the image, so probe the login port with bash's /dev/tcp.
+      test: ["CMD-SHELL", "timeout 5 bash -c 'exec 3<>/dev/tcp/127.0.0.1/8081' && mariadb-admin ping --socket=/run/mysqld/mysqld.sock --silent"]
+      interval: 30s
+      timeout: 15s
+      retries: 3
+      # First boot also imports ~1.2GB of SQL dumps before services start.
+      start_period: 900s
+
+x-casaos:
+  architectures: ["amd64"]
+  main: wow-forever
+  title:
+    en_us: WoW Forever (Classic 1.12)
+  icon: https://raw.githubusercontent.com/JoshEvans-Weber/casaos-store/main/Apps/wow-forever/icon.png
+  author: JoshEvans-Weber
+  category: Games
+  version: "1.0.0"
+  tagline:
+    en_us: Self-hosted WoW Classic server with a registration site and 4 selectable realms
+  description:
+    en_us: All-in-one World of Warcraft 1.12 server appliance in a single container (MariaDB, login server, world server and a self-serve account signup page). Ships with game data, certificates and four ruleset realms - Trinity (PvE), PvP, RP and Hardcore. Set SERVER_IP to this machine's LAN IP before installing, then point clients at that address.
+  port_map: "8080"
